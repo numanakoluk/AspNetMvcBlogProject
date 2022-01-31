@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityLayer
+namespace EntiyLayers
 {
-    public class Comment:EntityBase
+    public class Comment : EntityBase
     {
         public string Text { get; set; }
 

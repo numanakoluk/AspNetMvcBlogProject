@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EntityLayer
+namespace EntiyLayers
 {
-    public class NoteUser:EntityBase
+    public class NoteUser : EntityBase
     {
         public string Name { get; set; }
         public string Surname { get; set; }
