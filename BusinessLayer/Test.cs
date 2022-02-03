@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-   public class Test
+    
+    public class Test
     {
         public Test()
         {
-            DataAccessLayer
+            DataAccessLayer.DataBaseContext db = new DataAccessLayer.DataBaseContext();
+            //db.Database.CreateIfNotExists(); //Ctor Tanımlayarak Açtığımda DB Oluştur diyorum.Bunu da Contreller'da çağırıcam
+            db.Categories.ToList(); // Fake Data için bir tane data çağırmam yeterli şimdilik.
         }
     }
 }

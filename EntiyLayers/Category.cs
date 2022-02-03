@@ -19,6 +19,11 @@ namespace EntiyLayers
         //Categoryinin notları var.İlişkisel olduğu için virtual olarak tanımladım.
         public virtual List<Note> Notes { get; set; }
 
+        //Not eklediğimde null hatası almıyım.
+        public Category()
+        {
+            Notes = new List<Note>();
+        }
 
 
 

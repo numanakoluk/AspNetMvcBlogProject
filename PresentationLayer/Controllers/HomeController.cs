@@ -11,6 +11,8 @@ namespace PresentationLayer.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //BL' deki Ctoru cağırıyorum.
+            BusinessLayer.Test test = new BusinessLayer.Test();
             return View();
         }
     }
