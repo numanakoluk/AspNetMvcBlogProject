@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-   public class Repository<T> where T:class
+   public class Repository<T> :RepositoryBase where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
     {
         //Repository pattern
 
         //private DataBaseContext db = new DataBaseContext(); Eski Hali BasedClass öncesi
-        private DataBaseContext db; //RepositoryBase
+        
         private DbSet<T> _objectSet;
         public Repository()
         {
-            db =RepositoryBase.CreateContext(); //Bu bana databaseContexti verecek.
-            _objectSet = db.Set<T>(); //Ctor Calıstıgında dbSet<T> türü calısacak böylece her seferinde ilgili T'yi cagırmakla ugraşmayacak Category,Comment  icin.
+            //db =RepositoryBase.CreateContext(); //Bu bana databaseContexti verecek.
+            _objectSet = context.Set<T>(); //Ctor Calıstıgında dbSet<T> türü calısacak böylece her seferinde ilgili T'yi cagırmakla ugraşmayacak Category,Comment  icin.
         }
         public List<T> List()
         {
@@ -49,10 +49,10 @@ namespace BusinessLayer
             return Save();
         }
         //Her zaman kullanılsın istemediğimiz için bu şekilde private yapıldı.
-        private int Save()//Kaç adet kayıt dönecek
+        public int Save()//Kaç adet kayıt dönecek
         {
 
-            return db.SaveChanges();
+            return context.SaveChanges();
         } 
         public T Find(Expression<Func<T, bool>> where) //geriye tek bir tür döndürüyorum list döndürmüyorum.
         {

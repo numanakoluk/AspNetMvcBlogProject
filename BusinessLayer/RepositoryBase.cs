@@ -10,26 +10,24 @@ namespace BusinessLayer
     //Singleton Pattern : Bir kere newlensin amacım kontrollü bir şekilde DataBaseContext classının oluşmasını sağlamak.
     public class RepositoryBase
     {
-        private static DataBaseContext _db; //Başta newlemedim amaç zaten newlememek
+        protected static DataBaseContext context; //Başta newlemedim amaç zaten newlememek.Protected'a çevirdim ki Repository Miras alsın.
         private static object _lockSync = new object(); //Lock'lama için
         protected RepositoryBase() //Artık bu class newlenemez sadece Miras alan newleyebilir.
         {
-
+            CreateContext(); //Miras alındığında ctor'da çalışacak.
         }
-        public static DataBaseContext CreateContext() //Statik yaptığımdan ötürü newlenemez.
+        public static void CreateContext() //Statik yaptığımdan ötürü newlenemez.
         {
-            if(_db==null) //Null'sa newle Değilse bir daha newleme.
+            if(context==null) //Null'sa newle Değilse bir daha newleme.
             {
                 lock(_lockSync) //sadece 1 parçacaık bunu çalıştırabilsin demiş oluyoruz.Multithread uygulamalar için
                 {
-                    if (_db == null) //İşi garantiye alıyorum.
+                    if (context == null) //İşi garantiye alıyorum.
                     {
-                        _db = new DataBaseContext();
+                        context = new DataBaseContext();
                     }
-                
                 }
             }
-            return _db;
         }
     }
 }
