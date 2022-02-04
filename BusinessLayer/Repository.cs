@@ -13,10 +13,12 @@ namespace BusinessLayer
     {
         //Repository pattern
 
-        private DataBaseContext db = new DataBaseContext();
+        //private DataBaseContext db = new DataBaseContext(); Eski Hali BasedClass öncesi
+        private DataBaseContext db; //RepositoryBase
         private DbSet<T> _objectSet;
         public Repository()
         {
+            db =RepositoryBase.CreateContext(); //Bu bana databaseContexti verecek.
             _objectSet = db.Set<T>(); //Ctor Calıstıgında dbSet<T> türü calısacak böylece her seferinde ilgili T'yi cagırmakla ugraşmayacak Category,Comment  icin.
         }
         public List<T> List()
@@ -46,7 +48,8 @@ namespace BusinessLayer
             _objectSet.Remove(obj);
             return Save();
         }
-        public int Save()//Kaç adet kayıt dönecek
+        //Her zaman kullanılsın istemediğimiz için bu şekilde private yapıldı.
+        private int Save()//Kaç adet kayıt dönecek
         {
 
             return db.SaveChanges();

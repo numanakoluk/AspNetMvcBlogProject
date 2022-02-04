@@ -17,7 +17,10 @@ namespace PresentationLayer.Controllers
             //test.InsertTest();
 
             //Update işlemi için
-            test.UpdateTest();
+            //test.UpdateTest();
+            //Delete işlemi için
+            //test.DeleteTest();
+            test.CommentTest();
             return View();
         }
   

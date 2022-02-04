@@ -10,9 +10,16 @@ namespace BusinessLayer
     
     public class Test
     {
+        private Repository<NoteUser> repo_user = new Repository<NoteUser>();
+
         private Repository<Category> repo_category = new Repository<Category>();
 
-        private Repository<NoteUser> repo_user = new Repository<NoteUser>();
+
+        //İlişkili tablo için
+        private Repository<Comment> repo_comment = new Repository<Comment>();
+        private Repository<Note> repo_note = new Repository<Note>();
+
+
 
         public Test()
         {
@@ -22,6 +29,8 @@ namespace BusinessLayer
             //Şimdi bu işlemi repository yapacak.
             //repo.List(x => x.Id > 5); expression şartlı olan sorgu aşırı yüklenmiş  
             List<Category> categories = repo_category.List();
+            //Koşullu List İçin
+            //List<Category> categories_filtered = repo_category.List(x=>x.Id>5);
             //BreakPointte List'in calıstığını Break Pointte gördüm
         }
         public void InsertTest()
@@ -46,9 +55,34 @@ namespace BusinessLayer
             if (user != null) //Eğer böyle bir kullanıcıyı bulursan
             {
                 user.UserName = "xxx";
-                repo_user.Save();
-                int result = repo_user.Save();
+                
+                int result = repo_user.Update(user);
             }
+        }
+        public void DeleteTest()
+        {
+            NoteUser user = repo_user.Find(x => x.UserName == "xxx");
+            if (user!= null)
+            {
+                int result=repo_user.Delete(user);
+            }
+        }
+
+        public void CommentTest()
+        {
+            //İlişkili tabloda veri ekleme
+            NoteUser user = repo_user.Find(x => x.Id == 1); //Bu kullanıcıya
+            Note note = repo_note.Find(x => x.Id == 3); //Bu notu
+            Comment comment = new Comment() { 
+            Text="Bu bir test'dir",
+            CreatedOn = DateTime.Now,
+            ModifiedOn = DateTime.Now,
+            ModifiedUserName = "numanakoluk",
+            Note = note,
+            Owner = user
+            
+            };
+            repo_comment.Insert(comment); //ekle
         }
     }
 }
