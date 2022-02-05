@@ -1,6 +1,6 @@
 ﻿using BusinessLayer;
 using EntiyLayers;
-using PresentationLayer.ViewModels;
+using EntiyLayers.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,10 +57,21 @@ namespace PresentationLayer.Controllers
         }
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
-        {
-            //Giriş Kontrolü
-            //Session'a kullanıcı bilgi saklama
-            return View();
+        {                  
+            if (ModelState.IsValid)
+            {
+                NoteUserManager nm = new NoteUserManager();
+                BusinessLayerResult<NoteUser> res = nm.LoginUser(model);
+                if (res.Errors.Count > 0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
+
+                    return View(model);
+                }
+                Session["login"] = res.Result;//Session'a kullanıcı bilgi saklama
+                return RedirectToAction("Index"); //Yönlendirme
+            }
+            return View(model);
         }
         public ActionResult Register()
         {
@@ -72,29 +83,19 @@ namespace PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Username=="aaa")
+                NoteUserManager num = new NoteUserManager();
+                BusinessLayerResult<NoteUser> res = num.RegisterUser(model);
+                if (res.Errors.Count>0)
                 {
-                    ModelState.AddModelError("", "Kullanıcı Adı Kullanılıyor.");
-                }
-                if (model.Email == "aaa@aa.com") 
-                {
-                    ModelState.AddModelError("", "E-Posta Adresi Kullanılıyor.");
-                }
-                foreach (var item in ModelState)
-                {
-                    if (item.Value.Errors.Count>0)
-                    {
-                        return View(model);
-                    }
-                }
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
 
+                    return View(model);
+                    
+
+                }
                 return RedirectToAction("RegisterOk"); //Her şey okeyse.
             }
-            //Kullanıcı username kontrolü
-            //Kullanıcı e-posta kontrolü
-            //Kayıt işlemi
-            //Kayıt işlemi
-            //Aktivasyon e-postası gönderimi.
+           
             return View(model);
         }
         public  ActionResult RegisterOk()

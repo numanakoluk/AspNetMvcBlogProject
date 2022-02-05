@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.Abstract;
+using EntiyLayers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -41,16 +42,45 @@ namespace DataAccessLayer.EntityFramework
         {
             //db.Set<T>().Add(obj);
             _objectSet.Add(obj);
+            if (obj is EntityBase) //Miras almışssa
+            {
+                EntityBase o = obj as EntityBase;
+                DateTime now = DateTime.Now;
+
+                o.CreatedOn = now;
+                o.ModifiedOn = now;
+                o.ModifiedUserName = "system"; //TODO: İşlem yapan kullanıcı adı yazılmalı...
+
+            }
             return Save();  //Methodu asagıdan cagırdık.
 
         }
         public int Update(T obj) //sadece nesneyi cagırdım.
         {
+            if (obj is EntityBase) //Miras almışssa
+            {
+                EntityBase o = obj as EntityBase;
+
+            
+                o.ModifiedOn = DateTime.Now;
+                o.ModifiedUserName = "system"; //TODO: İşlem yapan kullanıcı adı yazılmalı...
+
+            }
             return Save();
         }
 
         public int Delete(T obj)
         {
+            //if (obj is EntityBase) //Miras almışssa
+            //{
+            //    EntityBase o = obj as EntityBase;
+
+
+            //    o.ModifiedOn = DateTime.Now;
+            //    o.ModifiedUserName = "system"; //TODO: İşlem yapan kullanıcı adı yazılmalı...
+
+            //}
+
             _objectSet.Remove(obj);
             return Save();
         }

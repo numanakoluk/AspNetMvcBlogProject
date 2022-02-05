@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayerResult.cs" />
     <Compile Include="CategoryManager.cs" />
     <Compile Include="NoteManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NoteUserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
