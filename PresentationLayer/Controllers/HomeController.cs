@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using EntiyLayers;
+using EntiyLayers.Messages;
 using EntiyLayers.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,11 @@ namespace PresentationLayer.Controllers
                 BusinessLayerResult<NoteUser> res = nm.LoginUser(model);
                 if (res.Errors.Count > 0)
                 {
-                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
+                    if (res.Errors.Find(x => x.Code == ErrorMessageCode.UserIsNotActive) != null) //Sınıf yazma sebebi bu
+                    {
+                        ViewBag.SetLink = "http://Home/Activate/1234-4567-7890"; //Aslında amaç gelen hata mesajlarını da ayıklamak.
+                    }
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
 
                     return View(model);
                 }
@@ -87,7 +92,7 @@ namespace PresentationLayer.Controllers
                 BusinessLayerResult<NoteUser> res = num.RegisterUser(model);
                 if (res.Errors.Count>0)
                 {
-                    res.Errors.ForEach(x => ModelState.AddModelError("", x));
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
 
                     return View(model);
                     
