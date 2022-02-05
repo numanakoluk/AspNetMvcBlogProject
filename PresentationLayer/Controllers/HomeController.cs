@@ -70,12 +70,16 @@ namespace PresentationLayer.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+
+            }
             //Kullanıcı username kontrolü
             //Kullanıcı e-posta kontrolü
             //Kayıt işlemi
             //Kayıt işlemi
             //Aktivasyon e-postası gönderimi.
-            return View();
+            return View(model);
         }
         public ActionResult ActivateUser(Guid activate_id)
         {
