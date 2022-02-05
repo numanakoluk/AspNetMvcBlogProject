@@ -11,16 +11,8 @@ namespace PresentationLayer.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //BL' deki Ctoru cağırıyorum.
-            BusinessLayer.Test test = new BusinessLayer.Test();
-            //Ekleme islemi icin
-            //test.InsertTest();
-
-            //Update işlemi için
-            //test.UpdateTest();
-            //Delete işlemi için
-            //test.DeleteTest();
-            test.CommentTest();
+            
+            
             return View();
         }
   

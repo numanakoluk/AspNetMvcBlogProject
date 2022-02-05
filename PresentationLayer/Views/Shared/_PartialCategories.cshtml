@@ -1,0 +1,18 @@
+﻿@using BusinessLayer
+@using EntiyLayers
+
+
+@{
+    CategoryManager cm = new CategoryManager();
+    List<Category> list = cm.GetCategories();
+}
+
+<p class="lead">Kategoriler</p>
+<div class="list-group">
+    <a href="/Home/Index" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>Tümü</a>
+    @foreach (Category item in list)
+    {
+        <a href="/Category/Select/@item.Id" title="@item.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Title</a>
+    }
+
+</div>
