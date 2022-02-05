@@ -46,6 +46,7 @@
     <Compile Include="Comment.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Liked.cs" />
+    <Compile Include="Messages\ErrorMessageCode.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="NoteUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.EntityFramework;
 using EntiyLayers;
+using EntiyLayers.Messages;
 using EntiyLayers.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -25,11 +26,11 @@ namespace BusinessLayer
             {
                 if (user.UserName == data.Username)
                 {
-                    res.Errors.Add("Kullanıcı Adı Kayıtlı");
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists,"Kullanıcı Adı Kayıtlı");
                 }
                 if (user.Email == data.Email)
                 {
-                    res.Errors.Add("E Posta Adresi Kayıtlı");
+                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-Posta Adresi Kayıtlı");
                 }
             }
             else
@@ -67,14 +68,17 @@ namespace BusinessLayer
             {
                 if (!res.Result.IsActive)
                 {
-                    res.Errors.Add("Kullanıcı Aktifleştirilmemiştir.Lütfen E-Posta Adresinizi Kontrol Ediniz.");
+                res.AddError(ErrorMessageCode.UserIsNotActive, "Kullanıcı Aktifleştirilmemiştir");
+                
+                res.AddError(ErrorMessageCode.CheckYourEmail, "Lütfen E-Posta Adresinizi Kontrol Ediniz.");
                 }
                 
 
             }
             else
             {
-                res.Errors.Add("Kullanıcı Adı veya Şifre Uyuşmuyor.");
+                res.AddError(ErrorMessageCode.UsernamaOrPassWrong, "Kullanıcı Adı veya Şifre Uyuşmuyor.");
+                
             }
             return res;
         }
