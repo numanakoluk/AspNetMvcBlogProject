@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer
+namespace DataAccessLayer.EntityFramework
 {
     //Singleton Pattern : Bir kere newlensin amacım kontrollü bir şekilde DataBaseContext classının oluşmasını sağlamak.
     public class RepositoryBase

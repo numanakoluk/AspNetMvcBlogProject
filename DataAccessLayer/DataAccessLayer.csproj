@@ -51,10 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBaseContext.cs" />
+    <Compile Include="Abstract\IRepository.cs" />
+    <Compile Include="EntityFramework\DataBaseContext.cs" />
     <Compile Include="EntityFramework\Repository.cs" />
     <Compile Include="EntityFramework\RepositoryBase.cs" />
-    <Compile Include="MyInitilaizer.cs" />
+    <Compile Include="EntityFramework\MyInitilaizer.cs" />
+    <Compile Include="MySql\Repository.cs" />
+    <Compile Include="MySql\RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

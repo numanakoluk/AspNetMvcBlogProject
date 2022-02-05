@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EntiyLayers;
 
-namespace DataAccessLayer
+namespace DataAccessLayer.EntityFramework
 {
     //Fake Data İçin
     class MyInitilaizer : CreateDatabaseIfNotExists<DataBaseContext> //Database yokken çalışsın

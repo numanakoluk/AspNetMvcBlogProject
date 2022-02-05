@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,9 +8,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer
+namespace DataAccessLayer.EntityFramework
 {
-   public class Repository<T> :RepositoryBase where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
+   public class Repository<T> :RepositoryBase, IRepository<T> where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
     {
         //Repository pattern
 
