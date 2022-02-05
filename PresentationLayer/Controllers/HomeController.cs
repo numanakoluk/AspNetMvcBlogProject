@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using EntiyLayers;
+using PresentationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,8 +55,31 @@ namespace PresentationLayer.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            //Giriş Kontrolü
+            //Session'a kullanıcı bilgi saklama
+            return View();
+        }
         public ActionResult Register()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            //Kullanıcı username kontrolü
+            //Kullanıcı e-posta kontrolü
+            //Kayıt işlemi
+            //Kayıt işlemi
+            //Aktivasyon e-postası gönderimi.
+            return View();
+        }
+        public ActionResult ActivateUser(Guid activate_id)
+        {
+            //kullanıcı aktivasyonu sağlanacak
             return View();
         }
         public ActionResult Logout()
