@@ -12,7 +12,7 @@
     <a href="/Home/Index" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>Tümü</a>
     @foreach (Category item in list)
     {
-        <a href="/Category/Select/@item.Id" title="@item.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Title</a>
+        <a href="/Home/ByCategory/@item.Id" title="@item.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Title</a>
     }
 
 </div>

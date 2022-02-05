@@ -27,6 +27,11 @@ namespace DataAccessLayer.EntityFramework
             //return db.Set<T>().ToList(); //Burada set edecegimiz icin bir kısıt yazmamız gerekiyor.Bu int da olabilir fakat kısıtladığımız zaman hata gidiyor.
            return _objectSet.ToList();
         }
+        public IQueryable<T> ListQueryable()
+        {
+            //Şartlı sorgu için..
+            return _objectSet.AsQueryable<T>();
+        }
         public List<T> List(Expression<Func<T,bool>> where) //İstenilen kritere göre Listeletme
         {
             return _objectSet.Where(where).ToList(); //Expressionu parametre olarak yazdım.

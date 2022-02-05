@@ -11,7 +11,7 @@ namespace DataAccessLayer.Abstract
     {
          List<T> List();
 
-
+         IQueryable<T> ListQueryable();
 
          List<T> List(Expression<Func<T, bool>> where);
 

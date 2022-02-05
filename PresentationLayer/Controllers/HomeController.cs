@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessLayer;
+using EntiyLayers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,10 +13,56 @@ namespace PresentationLayer.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            //CategoryController üzerinden gelen view Talebi ve model
+            //if(TempData["mm"]!= null)
+            //{
+            //    return View(TempData["mm"] as List<Note>);
+            //}
+            NoteManager nm = new NoteManager();
             
-            
+            return View(nm.GetAllNote().OrderByDescending(x=>x.ModifiedOn).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
+            //return View(nm.GetAllNote().OrderByDescending(x=>x.ModifiedOn).ToList()); //Sql Tarafından 
+
+        }
+        public ActionResult ByCategory(int? id) //id boş geçilerek de select cagırılabilir.
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            CategoryManager cm = new CategoryManager();
+            Category cat = cm.GetCategoryById(id.Value); //value ile ilgili değeri getir.
+
+            if (cat == null)
+            {
+                return HttpNotFound();
+                //return RedirectToAction("Index", "Home"); // Bu da olabilirdi
+            }
+            return View("Index", cat.Notes.OrderByDescending(x=>x.ModifiedOn).ToList());
+        }
+        public ActionResult MostLiked()
+        {
+            NoteManager nm = new NoteManager();
+
+            return View("Index",nm.GetAllNote().OrderByDescending(x => x.LikeCount).ToList()); //ındex viewinda
+        }
+        public ActionResult About()
+        {
             return View();
         }
-  
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult Register()
+        {
+            return View();
+        }
+        public ActionResult Logout()
+        {
+            return View();
+        }
+
+
     }
 }
