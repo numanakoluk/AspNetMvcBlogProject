@@ -72,7 +72,23 @@ namespace PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.Username=="aaa")
+                {
+                    ModelState.AddModelError("", "Kullanıcı Adı Kullanılıyor.");
+                }
+                if (model.Email == "aaa@aa.com") 
+                {
+                    ModelState.AddModelError("", "E-Posta Adresi Kullanılıyor.");
+                }
+                foreach (var item in ModelState)
+                {
+                    if (item.Value.Errors.Count>0)
+                    {
+                        return View(model);
+                    }
+                }
 
+                return RedirectToAction("RegisterOk"); //Her şey okeyse.
             }
             //Kullanıcı username kontrolü
             //Kullanıcı e-posta kontrolü
@@ -80,6 +96,11 @@ namespace PresentationLayer.Controllers
             //Kayıt işlemi
             //Aktivasyon e-postası gönderimi.
             return View(model);
+        }
+        public  ActionResult RegisterOk()
+        {
+            return View();
+
         }
         public ActionResult ActivateUser(Guid activate_id)
         {
