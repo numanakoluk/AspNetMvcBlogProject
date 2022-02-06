@@ -1,4 +1,5 @@
-﻿using DataAccessLayer;
+﻿using Common;
+using DataAccessLayer;
 using DataAccessLayer.Abstract;
 using EntiyLayers;
 using System;
@@ -49,7 +50,7 @@ namespace DataAccessLayer.EntityFramework
 
                 o.CreatedOn = now;
                 o.ModifiedOn = now;
-                o.ModifiedUserName = "system"; //TODO: İşlem yapan kullanıcı adı yazılmalı...
+                o.ModifiedUserName = App.Common.GetCurrentUserName(); //TODO: İşlem yapan kullanıcı adı yazılmalı...
 
             }
             return Save();  //Methodu asagıdan cagırdık.
@@ -63,7 +64,7 @@ namespace DataAccessLayer.EntityFramework
 
             
                 o.ModifiedOn = DateTime.Now;
-                o.ModifiedUserName = "system"; //TODO: İşlem yapan kullanıcı adı yazılmalı...
+                o.ModifiedUserName = App.Common.GetCurrentUserName(); //Artık bu şekilde çalışacak.
 
             }
             return Save();
@@ -77,7 +78,7 @@ namespace DataAccessLayer.EntityFramework
 
 
             //    o.ModifiedOn = DateTime.Now;
-            //    o.ModifiedUserName = "system"; //TODO: İşlem yapan kullanıcı adı yazılmalı...
+            //    o.ModifiedUserName =App.Common.GetUserName();
 
             //}
 
