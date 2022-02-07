@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.EntityFramework;
+﻿using Common.Helpers;
+using DataAccessLayer.EntityFramework;
 using EntiyLayers;
 using EntiyLayers.Messages;
 using EntiyLayers.ValueObjects;
@@ -52,6 +53,7 @@ namespace BusinessLayer
                     res.Result= repo_user.Find(x => x.Email == data.Email && x.UserName == data.Username);
                     //TODO: aktivasyon maili atılacak.
                 }
+                 MailHelper.SendMail("Hesabını aktifleştirmek için <a href=''>tıklayınız</a>.")
             }
             return res;
         }
