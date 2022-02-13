@@ -2,6 +2,7 @@
 using EntiyLayers;
 using EntiyLayers.Messages;
 using EntiyLayers.ValueObjects;
+using PresentationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,51 @@ namespace PresentationLayer.Controllers
         {
             return View();
         }
+        //Profil Goruntuleme
+        public ActionResult ShowProfile()
+        {
+            NoteUser currentUser = Session["login"] as NoteUser;
+            NoteUserManager num = new NoteUserManager();
+            BusinessLayerResult<NoteUser> res = num.GetUserByID(currentUser.Id);
+            if(res.Errors.Count>0)
+            {
+                //Kullanıcıyı bir hata ekranına yönlendirmek gerek
+            }
+            return View(res.Result);
+        }
+
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditProfile(NoteUser user)
+        {
+            return View();
+        }
+
+        //Get kısmında silinecek post kısmı js ile yapılacak
+        public ActionResult RemoveProfile()
+        {
+            return View();
+        }
+
+        public ActionResult TestNotify() 
+        {
+
+           ErrrorViewModel model = new ErrrorViewModel() //**Dikkat
+            {
+                Header = "Yönlendirme..",
+                Title = "Ok Test",
+                RedirectTimeOut = 3000,
+                Items = new List<ErrorMessageObj>()
+                { new ErrorMessageObj() { Message = "Test başarılı 1" },
+                  new ErrorMessageObj() { Message="Test başarılı 2"}}
+            };
+            return View("Error",model); //Eğer bunu yapmasam düz açılacak
+        }
+
         public ActionResult Login()
         {
             return View();

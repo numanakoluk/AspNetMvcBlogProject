@@ -22,6 +22,9 @@ namespace EntiyLayers
         [Required,StringLength(25)]
         public string Password { get; set; }
 
+        [StringLength(30)] //kullanıcı_12.jpg gibi
+        public string ProfileImageFileName { get; set; }
+
         //Aktif mi kullanıcı?
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }

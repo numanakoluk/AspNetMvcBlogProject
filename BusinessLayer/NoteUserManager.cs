@@ -62,6 +62,17 @@ namespace BusinessLayer
             return res;
         }
 
+        public BusinessLayerResult<NoteUser> GetUserByID(int id)
+        {
+            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
+            res.Result = repo_user.Find(x => x.Id == id);
+            if (res.Result == null)
+            {
+                res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı Bulunamadı.");
+            }
+            return res;
+        }
+
         public BusinessLayerResult<NoteUser> LoginUser(LoginViewModel data)
         {
             //Giriş Kontrolü

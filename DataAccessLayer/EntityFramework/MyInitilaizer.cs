@@ -22,8 +22,9 @@ namespace DataAccessLayer.EntityFramework
                 ActivateGuid = Guid.NewGuid(),
                 IsActive = true,
                 IsAdmin = true,
-                UserName ="numanakoluk",
+                UserName ="numanakoluk",          
                 Password = "123456",
+                ProfileImageFileName = "user.png",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now.AddMinutes(5),
                 ModifiedUserName = "numanakoluk"
@@ -39,6 +40,7 @@ namespace DataAccessLayer.EntityFramework
                 IsAdmin = true,
                 UserName = "musaakoluk",
                 Password = "654321",
+                ProfileImageFileName = "user.png",
                 CreatedOn = DateTime.Now.AddHours(1),
                 ModifiedOn = DateTime.Now.AddMinutes(65),
                 ModifiedUserName = "numanakoluk"
@@ -55,6 +57,7 @@ namespace DataAccessLayer.EntityFramework
                     Name = FakeData.NameData.GetFirstName(),
                     Surname = FakeData.NameData.GetSurname(),
                     Email = FakeData.NetworkData.GetEmail(),
+                    ProfileImageFileName = "user.png",
                     ActivateGuid = Guid.NewGuid(),
                     IsActive = true,
                     IsAdmin = true,
