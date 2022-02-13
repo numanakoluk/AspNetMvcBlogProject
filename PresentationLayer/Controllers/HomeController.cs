@@ -108,11 +108,39 @@ namespace PresentationLayer.Controllers
             return View();
 
         }
-        public ActionResult ActivateUser(Guid activate_id)
+        public ActionResult UserActivate(Guid id)
+        {
+            NoteUserManager num = new NoteUserManager();
+            BusinessLayerResult<NoteUser> res= num.ActivateUser(id);
+
+            if (res.Errors.Count>0)
+            {
+                TempData["errors"] = res.Errors;
+                return RedirectToAction("UserActivateCancel");
+            }
+
+            return RedirectToAction("UserActivateOk");
+        }
+
+        public ActionResult UserActivateOk()
         {
             //kullanıcı aktivasyonu sağlanacak
             return View();
         }
+
+        public ActionResult UserActivateCancel()
+        {
+            List<ErrorMessageObj> errors = null;
+            if (TempData["errors"] != null)
+            {
+                 errors= TempData["errors"] as List<ErrorMessageObj>; //TempData obje olarak tuttuğu için as diyerek tip dönüşümü
+
+            }
+            
+
+            return View(errors);
+        }
+
         public ActionResult Logout()
         {
             Session.Clear();

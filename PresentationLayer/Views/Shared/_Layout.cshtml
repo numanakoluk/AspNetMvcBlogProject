@@ -1,4 +1,4 @@
-﻿﻿
+﻿@using EntiyLayers
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +24,15 @@
     <![endif]-->
 </head>
 <body>
+    <!--LayoutGözükeceklerAyıklama-->
+    @{ 
+        NoteUser user = null;
+        if (Session["login"] !=null)
+        {
+            user = Session["login"] as NoteUser;
+        }
+    }
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -35,16 +44,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Blog Site</a>
+                <a class="navbar-brand" href="Home/Index">Blog Site</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-wrench"></span>Yönetim
-                        </a>
-                    </li>
+                    @if (user != null)
+                    {
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-wrench"></span>Yönetim
+                            </a>
+                        </li>
+                    }
                     <li>
                         <a href="/Home/MostLiked">
                             <span class="glyphicon glyphicon-heart-empty"></span>En Beğenilenler
@@ -62,25 +74,39 @@
                     </li>
 
                 </ul>
-                <ul class="nav navbar-nav navbar-right"> <!--navbar-nav ise listi yan yana yaptı.Sağa dayalı olmasını sağladık--> 
+                <ul class="nav navbar-nav navbar-right">
+                    <!--navbar-nav ise listi yan yana yaptı.Sağa dayalı olmasını sağladık-->
+                    @if (user == null)
+                    {
+                        <li>
+                            <a href="/Home/Login">
+                                Giriş
+                                <span class="glyphicon glyphicon-log-in"></span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/Home/Register">
+                                Üye Ol
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
+                        </li>
+                    }
+                    else {
+
                     <li>
-                        <a href="#">Giriş
-                            <span class="glyphicon glyphicon-log-in"></span></a>
+                        <a href="/Home/Profile">
+                            @user.UserName
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
                     </li>
-                    
                     <li>
-                        <a href="#">Üye Ol
-                            <span class="glyphicon glyphicon-user"></span></a>
-                    </li>
-                    <li>
-                        <a href="#">Numan Akoluk
-                            <span class="glyphicon glyphicon-user"></span></a>
-                    </li>
-                    <li>
-                        <a href="#">Çıkış
+                        <a href="/Home/Logout">
+                            Çıkış
                             <span class="glyphicon glyphicon-log-out"></span>
                         </a>
                     </li>
+                    }
 
                 </ul>
             </div>

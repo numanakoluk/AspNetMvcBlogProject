@@ -52,8 +52,12 @@ namespace BusinessLayer
                 {
                     res.Result= repo_user.Find(x => x.Email == data.Email && x.UserName == data.Username);
                     //TODO: aktivasyon maili atılacak.
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string activateUri = $"{siteUri}/Home/UserActivate/{res.Result.ActivateGuid}";
+                    string body = $"Merhaba {res.Result.UserName};<br><br>Hesabını aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayınız</a>.";
+                    MailHelper.SendMail(body, res.Result.Email, "Blog Hesap Aktifleştirme");
                 }
-                 MailHelper.SendMail("Hesabını aktifleştirmek için <a href=''>tıklayınız</a>.")
+               
             }
             return res;
         }
@@ -83,6 +87,31 @@ namespace BusinessLayer
                 
             }
             return res;
+        }
+        public BusinessLayerResult<NoteUser> ActivateUser(Guid activateId)
+        {
+            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
+            res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
+
+            if (res.Result != null)
+            {
+                if (res.Result.IsActive)
+                {
+                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Kullanıcı Zaten Aktif Edilmiştir.");
+                    return res;
+                }
+                res.Result.IsActive = true;
+                repo_user.Update(res.Result);
+            }
+
+            else
+            {
+                res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirecek Kullanıcı Bulunamadı.");
+
+            }
+
+            return res;
+
         }
     }
 }

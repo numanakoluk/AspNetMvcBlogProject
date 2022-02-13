@@ -17,7 +17,7 @@ namespace PresentationLayer.Init
                 NoteUser user = HttpContext.Current.Session["login"] as NoteUser;
                 return user.UserName; //noteuser varsa
             }
-            return null;
+            return "system";
         }
     }
 }
