@@ -31,6 +31,7 @@ namespace PresentationLayer.ViewModels
             IsRedirecting = true;
             RedirectingUrl = "/Home/Index";
             RedirectTimeOut = 10000;
+            Items = new List<T>(); //Devamlı new'lememek için..
         }
     }
 }

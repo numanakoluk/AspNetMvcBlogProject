@@ -40,6 +40,7 @@ namespace BusinessLayer
                 {
                     UserName = data.Username,
                     Email = data.Email,
+                    ProfileImageFileName = "user.png",
                     Password = data.Password,
                     ActivateGuid = Guid.NewGuid(),
                     

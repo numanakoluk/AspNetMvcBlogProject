@@ -61,7 +61,14 @@ namespace PresentationLayer.Controllers
             BusinessLayerResult<NoteUser> res = num.GetUserByID(currentUser.Id);
             if(res.Errors.Count>0)
             {
-                //Kullanıcıyı bir hata ekranına yönlendirmek gerek
+                ErrrorViewModel errorNotfiyObje = new ErrrorViewModel()
+                {
+                    Title = "Hata Oluştu.",
+                    Items = res.Errors
+
+                };
+
+                return View("Error", errorNotfiyObje);
             }
             return View(res.Result);
         }
@@ -83,20 +90,20 @@ namespace PresentationLayer.Controllers
             return View();
         }
 
-        public ActionResult TestNotify() 
-        {
+        //public ActionResult TestNotify() 
+        //{
 
-           ErrrorViewModel model = new ErrrorViewModel() //**Dikkat
-            {
-                Header = "Yönlendirme..",
-                Title = "Ok Test",
-                RedirectTimeOut = 3000,
-                Items = new List<ErrorMessageObj>()
-                { new ErrorMessageObj() { Message = "Test başarılı 1" },
-                  new ErrorMessageObj() { Message="Test başarılı 2"}}
-            };
-            return View("Error",model); //Eğer bunu yapmasam düz açılacak
-        }
+        //   ErrrorViewModel model = new ErrrorViewModel() //**Dikkat
+        //    {
+        //        Header = "Yönlendirme..",
+        //        Title = "Ok Test",
+        //        RedirectTimeOut = 3000,
+        //        Items = new List<ErrorMessageObj>()
+        //        { new ErrorMessageObj() { Message = "Test başarılı 1" },
+        //          new ErrorMessageObj() { Message="Test başarılı 2"}}
+        //    };
+        //    return View("Error",model); //Eğer bunu yapmasam düz açılacak
+        //}
 
         public ActionResult Login()
         {
@@ -144,16 +151,21 @@ namespace PresentationLayer.Controllers
                     
 
                 }
-                return RedirectToAction("RegisterOk"); //Her şey okeyse.
+
+                OkViewModel notifyObj = new OkViewModel()
+                {
+                    Title = "Kayıt Başarılı",
+                    RedirectingUrl = "/Home/Login",
+                    
+                };
+                notifyObj.Items.Add("Lütfen e-posta adresinize gönderdiğimiz aktivasyon link'ine tıklayarak hesabınızı aktive ediniz. Hesabınızı aktive etmeden not ekleyemez ve beğenme yapamazsınız.");
+
+                return View("Ok",notifyObj); //Her şey okeyse.
             }
            
             return View(model);
         }
-        public  ActionResult RegisterOk()
-        {
-            return View();
-
-        }
+   
         public ActionResult UserActivate(Guid id)
         {
             NoteUserManager num = new NoteUserManager();
@@ -161,31 +173,43 @@ namespace PresentationLayer.Controllers
 
             if (res.Errors.Count>0)
             {
-                TempData["errors"] = res.Errors;
-                return RedirectToAction("UserActivateCancel");
+                ErrrorViewModel errorNotfiyObje = new ErrrorViewModel()
+                {
+                    Title="Geçersiz İşlem",
+                    Items = res.Errors
+
+                };
+
+                return View("Error", errorNotfiyObje);
             }
-
-            return RedirectToAction("UserActivateOk");
-        }
-
-        public ActionResult UserActivateOk()
-        {
-            //kullanıcı aktivasyonu sağlanacak
-            return View();
-        }
-
-        public ActionResult UserActivateCancel()
-        {
-            List<ErrorMessageObj> errors = null;
-            if (TempData["errors"] != null)
+            OkViewModel okNotifyObj = new OkViewModel()
             {
-                 errors= TempData["errors"] as List<ErrorMessageObj>; //TempData obje olarak tuttuğu için as diyerek tip dönüşümü
+                Title ="Hesap Aktifleştirildi",
+                RedirectingUrl = "/Home/Login"
+            };
+            okNotifyObj.Items.Add("Hesabınız Aktifleştirildi.Artık not paylaşabilir ve beğenme yapabilirsiniz.");
 
-            }
+            return View("Ok",okNotifyObj);
+        }
+
+        //public ActionResult UserActivateOk()
+        //{
+        //    //kullanıcı aktivasyonu sağlanacak
+        //    return View();
+        //}
+
+        //public ActionResult UserActivateCancel()
+        //{
+        //    List<ErrorMessageObj> errors = null;
+        //    if (TempData["errors"] != null)
+        //    {
+        //         errors= TempData["errors"] as List<ErrorMessageObj>; //TempData obje olarak tuttuğu için as diyerek tip dönüşümü
+
+        //    }
             
 
-            return View(errors);
-        }
+        //    return View(errors);
+        //}
 
         public ActionResult Logout()
         {
