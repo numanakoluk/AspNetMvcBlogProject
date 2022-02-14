@@ -75,13 +75,53 @@ namespace PresentationLayer.Controllers
 
         public ActionResult EditProfile()
         {
-            return View();
+            NoteUser currentUser = Session["login"] as NoteUser;
+            NoteUserManager num = new NoteUserManager();
+            BusinessLayerResult<NoteUser> res = num.GetUserByID(currentUser.Id);
+            if (res.Errors.Count > 0)
+            {
+                ErrrorViewModel errorNotfiyObje = new ErrrorViewModel()
+                {
+                    Title = "Hata Oluştu.",
+                    Items = res.Errors
+
+                };
+
+                return View("Error", errorNotfiyObje);
+            }
+            return View(res.Result);
         }
 
         [HttpPost]
-        public ActionResult EditProfile(NoteUser user)
+        public ActionResult EditProfile(NoteUser model, HttpPostedFileBase ProfileImage) //HttpPosteFileBase ile img çekilecek.
         {
-            return View();
+            if (ProfileImage != null &&
+                    (ProfileImage.ContentType == "image/jpeg" ||
+                    ProfileImage.ContentType == "image/jpg" ||
+                    ProfileImage.ContentType == "image/png"))
+            {
+                string filename = $"user_{model.Id}.{ProfileImage.ContentType.Split('/')[1]}"; //Dosya Adı
+
+                ProfileImage.SaveAs(Server.MapPath($"~/images/{filename}")); //Dosyayı kaydet
+                model.ProfileImageFileName = filename;
+            }
+            NoteUserManager eum = new NoteUserManager();
+            BusinessLayerResult<NoteUser> res = eum.UpdateProfile(model);
+            if (res.Errors.Count > 0)
+            {
+                ErrrorViewModel errorNotifyObj = new ErrrorViewModel()
+                {
+                    Items = res.Errors,
+                    Title = "Profil Güncellenemedi.",
+                    RedirectingUrl = "/Home/EditProfile"
+                };
+
+                return View("Error", errorNotifyObj);
+            }
+            Session["login"] = res.Result; //Profil güncellendiği için session güncellendi.
+
+            return RedirectToAction("ShowProfile");
+
         }
 
         //Get kısmında silinecek post kısmı js ile yapılacak
