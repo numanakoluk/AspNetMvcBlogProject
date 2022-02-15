@@ -95,33 +95,37 @@ namespace PresentationLayer.Controllers
         [HttpPost]
         public ActionResult EditProfile(NoteUser model, HttpPostedFileBase ProfileImage) //HttpPosteFileBase ile img çekilecek.
         {
-            if (ProfileImage != null &&
+            if (ModelState.IsValid)
+            {
+                if (ProfileImage != null &&
                     (ProfileImage.ContentType == "image/jpeg" ||
                     ProfileImage.ContentType == "image/jpg" ||
                     ProfileImage.ContentType == "image/png"))
-            {
-                string filename = $"user_{model.Id}.{ProfileImage.ContentType.Split('/')[1]}"; //Dosya Adı
-
-                ProfileImage.SaveAs(Server.MapPath($"~/images/{filename}")); //Dosyayı kaydet
-                model.ProfileImageFileName = filename;
-            }
-            NoteUserManager eum = new NoteUserManager();
-            BusinessLayerResult<NoteUser> res = eum.UpdateProfile(model);
-            if (res.Errors.Count > 0)
-            {
-                ErrrorViewModel errorNotifyObj = new ErrrorViewModel()
                 {
-                    Items = res.Errors,
-                    Title = "Profil Güncellenemedi.",
-                    RedirectingUrl = "/Home/EditProfile"
-                };
+                    string filename = $"user_{model.Id}.{ProfileImage.ContentType.Split('/')[1]}"; //Dosya Adı
 
-                return View("Error", errorNotifyObj);
+                    ProfileImage.SaveAs(Server.MapPath($"~/images/{filename}")); //Dosyayı kaydet
+                    model.ProfileImageFileName = filename;
+                }
+                NoteUserManager eum = new NoteUserManager();
+                BusinessLayerResult<NoteUser> res = eum.UpdateProfile(model);
+                if (res.Errors.Count > 0)
+                {
+                    ErrrorViewModel errorNotifyObj = new ErrrorViewModel()
+                    {
+                        Items = res.Errors,
+                        Title = "Profil Güncellenemedi.",
+                        RedirectingUrl = "/Home/EditProfile"
+                    };
+
+                    return View("Error", errorNotifyObj);
+                }
+                Session["login"] = res.Result; //Profil güncellendiği için session güncellendi.
+
+                return RedirectToAction("ShowProfile");
+
             }
-            Session["login"] = res.Result; //Profil güncellendiği için session güncellendi.
-
-            return RedirectToAction("ShowProfile");
-
+            return View(model);
         }
 
         //Get kısmında silinecek post kısmı js ile yapılacak

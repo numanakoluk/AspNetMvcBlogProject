@@ -44,15 +44,4 @@
     color: black;
 }
 
-.validation-summary-errors {
-    border: 2px #a94442;
-    background-color: #d76663;
-    border-radius: 8px;
-}
 
-.validation-summary-errors ul {
-        list-style-type: none;
-        padding: 10px;
-        color: #fff;
-
-}
