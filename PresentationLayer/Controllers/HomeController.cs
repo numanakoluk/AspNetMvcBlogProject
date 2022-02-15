@@ -125,9 +125,26 @@ namespace PresentationLayer.Controllers
         }
 
         //Get kısmında silinecek post kısmı js ile yapılacak
-        public ActionResult RemoveProfile()
+        public ActionResult DeleteProfile()
         {
-            return View();
+            NoteUser currentUser = Session["login"] as NoteUser;
+
+            NoteUserManager num = new NoteUserManager();
+            BusinessLayerResult<NoteUser> res = num.RemoveUserById(currentUser.Id);
+
+            if (res.Errors.Count>0)
+            {
+                ErrrorViewModel errorNotifyObj = new ErrrorViewModel()
+                {
+                    Items = res.Errors,
+                    Title = "Profil Silinemedi.",
+                    RedirectingUrl = "/Home/ShowProfile"
+                };
+                return View("Error", errorNotifyObj);
+            }
+            Session.Clear();
+            return RedirectToAction("Index");
+
         }
 
         //public ActionResult TestNotify() 

@@ -13,7 +13,7 @@ namespace DataAccessLayer.EntityFramework
     {
         protected override void Seed(DataBaseContext context) //seed:ORNEK Database oluştuktan sonraki deki method.
         {
-            //Spesifc Kullanıcı Ekleme
+            //Admin Kullanıcı Ekleme
             NoteUser admin = new NoteUser()
             {
                 Name = "Numan",
@@ -50,6 +50,7 @@ namespace DataAccessLayer.EntityFramework
             context.NoteUsers.Add(admin);
             context.NoteUsers.Add(standartUser);
 
+            //8 Değer ekle...
             for (int i = 0; i < 8; i++)
             {
                 NoteUser user = new NoteUser()

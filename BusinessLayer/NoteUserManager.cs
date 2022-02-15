@@ -165,5 +165,28 @@ namespace BusinessLayer
 
             return res;
         }
+
+
+        public BusinessLayerResult<NoteUser> RemoveUserById(int id)
+        {
+            
+            
+            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
+            NoteUser user = repo_user.Find(x => x.Id == id);
+            if (user!= null)
+            {
+                if (repo_user.Delete(user) ==0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı Silinemedi.");
+                    return res;
+                }
+            }
+            else
+            {
+                //Admin silme durumu..
+                res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı Bulunumadı.");
+            }
+            return res;
+        }
     }
 }
