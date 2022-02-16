@@ -37,7 +37,7 @@ namespace DataAccessLayer.EntityFramework
                 Email = "musakoluk01@gmail.com",
                 ActivateGuid = Guid.NewGuid(),
                 IsActive = true,
-                IsAdmin = true,
+                IsAdmin = false,
                 UserName = "musaakoluk",
                 Password = "654321",
                 ProfileImageFileName = "user.png",

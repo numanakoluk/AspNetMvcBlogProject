@@ -95,6 +95,8 @@ namespace PresentationLayer.Controllers
         [HttpPost]
         public ActionResult EditProfile(NoteUser model, HttpPostedFileBase ProfileImage) //HttpPosteFileBase ile img çekilecek.
         {
+            
+            ModelState.Remove("ModifiedUserName"); //Hata mesajında görünmesin.
             if (ModelState.IsValid)
             {
                 if (ProfileImage != null &&

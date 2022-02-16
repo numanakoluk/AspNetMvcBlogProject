@@ -19,38 +19,15 @@
             <img src="~/images/@Model.ProfileImageFileName" class="img-circle" width="128" height="128" />
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-10">
             <h3>@(Model.Name + " " + Model.Surname)</h3>
             <br />
-            <h5><b>Username: </b>@Model.UserName</h5>
-            <h5><b>Email : </b>@Model.Email</h5>
+            <h5><b>@Html.DisplayNameFor(model => model.UserName) </b>@Model.UserName</h5>
+            <h5><b>@Html.DisplayNameFor(model => model.Email) : </b>@Model.Email</h5>
             <br />
             <h5><a href="#">More... </a></h5> <!--tIKLANINCA GİT-->
         </div>
-        <div class="col-md-2 text-right">
-            <div class="btn-group">
-                <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
-                    <span class="glyphicon glyphicon-cog">&nbsp;</span>
-                </a>
-                <ul class="dropdown-menu"> <!--Bootstrapte aynısı var kodların-->
-                    <li>
-                        <a href="@Url.Action("EditProfile")"><span class="glyphicon glyphicon-edit">
-                            &nbsp;</span>
-                            Düzenle
-                        </a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("DeleteProfile")" onclick="return confirm('Hesabınızı Silmek İstediğinize emin misiniz?')">
-                            <span class="glyphicon glyphicon-trash"> <!--Onclick olduğundaa-->
-                                &nbsp;
-                            </span>
-                            Sil
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
+    
     </div>
 </div>
 

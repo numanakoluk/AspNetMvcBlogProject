@@ -20,6 +20,8 @@
 
                 <div class="col-md-3">
                     <img src="~/images/@Model.ProfileImageFileName" class="img-circle" width="128" height="128" />
+                    <!--Model Image'i tutsun diye HiddenFor ile gizleyerek getirtiyorum.'-->
+                    @Html.HiddenFor(model=>model.ProfileImageFileName)
                     <br /><br />
                     <input type="file" name="ProfileImage" id="ProfileImage" class="form-control" /><br />
                     <span class="glyphicon glyphicon-info-sign">&nbsp;</span>
