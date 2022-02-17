@@ -1,6 +1,5 @@
 ﻿using Common;
-using DataAccessLayer;
-using DataAccessLayer.Abstract;
+using Core.DataAccess;
 using EntiyLayers;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.EntityFramework
 {
-   public class Repository<T> :RepositoryBase, IRepository<T> where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
+   public class Repository<T> :RepositoryBase, IDataAccess<T> where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
     {
         //Repository pattern
 

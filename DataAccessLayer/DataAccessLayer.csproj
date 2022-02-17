@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IRepository.cs" />
     <Compile Include="EntityFramework\DataBaseContext.cs" />
     <Compile Include="EntityFramework\Repository.cs" />
     <Compile Include="EntityFramework\RepositoryBase.cs" />
@@ -69,10 +68,17 @@
       <Project>{e6936685-4ecd-49b9-953d-e8595785fda8}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{67f5803e-1dba-492a-9e67-e13226418e0e}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EntiyLayers\EntiyLayers.csproj">
       <Project>{cf995f17-68b2-4210-ae3e-473e9741a05f}</Project>
       <Name>EntiyLayers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Abstract\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

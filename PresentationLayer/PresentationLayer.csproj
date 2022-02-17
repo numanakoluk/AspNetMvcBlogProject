@@ -157,6 +157,11 @@
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -166,8 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
@@ -177,6 +182,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{e6936685-4ecd-49b9-953d-e8595785fda8}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{67f5803e-1dba-492a-9e67-e13226418e0e}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\EntiyLayers\EntiyLayers.csproj">
       <Project>{cf995f17-68b2-4210-ae3e-473e9741a05f}</Project>

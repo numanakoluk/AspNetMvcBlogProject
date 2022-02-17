@@ -1,4 +1,5 @@
 ﻿using BusinessLayer;
+using BusinessLayer.Results;
 using EntiyLayers;
 using EntiyLayers.Messages;
 using EntiyLayers.ValueObjects;
@@ -13,6 +14,10 @@ namespace PresentationLayer.Controllers
 {
     public class HomeController : Controller
     {
+        private NoteManager noteManager = new NoteManager();
+        private CategoryManager categoryManager = new CategoryManager();
+        private NoteUserManager noteUserManager = new NoteUserManager();
+
         // GET: Home
         public ActionResult Index()
         {
@@ -21,9 +26,8 @@ namespace PresentationLayer.Controllers
             //{
             //    return View(TempData["mm"] as List<Note>);
             //}
-            NoteManager nm = new NoteManager();
             
-            return View(nm.GetAllNote().OrderByDescending(x=>x.ModifiedOn).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
+            return View(noteManager.ListQueryable().OrderByDescending(x=>x.ModifiedOn).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
             //return View(nm.GetAllNote().OrderByDescending(x=>x.ModifiedOn).ToList()); //Sql Tarafından 
 
         }
@@ -33,8 +37,7 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            CategoryManager cm = new CategoryManager();
-            Category cat = cm.GetCategoryById(id.Value); //value ile ilgili değeri getir.
+            Category cat = categoryManager.Find(x=>x.Id == id.Value); //value ile ilgili değeri getir.
 
             if (cat == null)
             {
@@ -45,9 +48,8 @@ namespace PresentationLayer.Controllers
         }
         public ActionResult MostLiked()
         {
-            NoteManager nm = new NoteManager();
 
-            return View("Index",nm.GetAllNote().OrderByDescending(x => x.LikeCount).ToList()); //ındex viewinda
+            return View("Index", noteManager.ListQueryable().OrderByDescending(x => x.LikeCount).ToList()); //ındex viewinda
         }
         public ActionResult About()
         {
@@ -57,8 +59,7 @@ namespace PresentationLayer.Controllers
         public ActionResult ShowProfile()
         {
             NoteUser currentUser = Session["login"] as NoteUser;
-            NoteUserManager num = new NoteUserManager();
-            BusinessLayerResult<NoteUser> res = num.GetUserByID(currentUser.Id);
+            BusinessLayerResult<NoteUser> res = noteUserManager.GetUserByID(currentUser.Id);
             if(res.Errors.Count>0)
             {
                 ErrrorViewModel errorNotfiyObje = new ErrrorViewModel()
@@ -76,8 +77,7 @@ namespace PresentationLayer.Controllers
         public ActionResult EditProfile()
         {
             NoteUser currentUser = Session["login"] as NoteUser;
-            NoteUserManager num = new NoteUserManager();
-            BusinessLayerResult<NoteUser> res = num.GetUserByID(currentUser.Id);
+            BusinessLayerResult<NoteUser> res = noteUserManager.GetUserByID(currentUser.Id);
             if (res.Errors.Count > 0)
             {
                 ErrrorViewModel errorNotfiyObje = new ErrrorViewModel()
@@ -109,8 +109,7 @@ namespace PresentationLayer.Controllers
                     ProfileImage.SaveAs(Server.MapPath($"~/images/{filename}")); //Dosyayı kaydet
                     model.ProfileImageFileName = filename;
                 }
-                NoteUserManager eum = new NoteUserManager();
-                BusinessLayerResult<NoteUser> res = eum.UpdateProfile(model);
+                BusinessLayerResult<NoteUser> res = noteUserManager.UpdateProfile(model);
                 if (res.Errors.Count > 0)
                 {
                     ErrrorViewModel errorNotifyObj = new ErrrorViewModel()
@@ -135,8 +134,7 @@ namespace PresentationLayer.Controllers
         {
             NoteUser currentUser = Session["login"] as NoteUser;
 
-            NoteUserManager num = new NoteUserManager();
-            BusinessLayerResult<NoteUser> res = num.RemoveUserById(currentUser.Id);
+            BusinessLayerResult<NoteUser> res = noteUserManager.RemoveUserById(currentUser.Id);
 
             if (res.Errors.Count>0)
             {
@@ -177,8 +175,7 @@ namespace PresentationLayer.Controllers
         {                  
             if (ModelState.IsValid)
             {
-                NoteUserManager nm = new NoteUserManager();
-                BusinessLayerResult<NoteUser> res = nm.LoginUser(model);
+                BusinessLayerResult<NoteUser> res = noteUserManager.LoginUser(model);
                 if (res.Errors.Count > 0)
                 {
                     if (res.Errors.Find(x => x.Code == ErrorMessageCode.UserIsNotActive) != null) //Sınıf yazma sebebi bu
@@ -204,8 +201,7 @@ namespace PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                NoteUserManager num = new NoteUserManager();
-                BusinessLayerResult<NoteUser> res = num.RegisterUser(model);
+                BusinessLayerResult<NoteUser> res = noteUserManager.RegisterUser(model);
                 if (res.Errors.Count>0)
                 {
                     res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
@@ -231,8 +227,7 @@ namespace PresentationLayer.Controllers
    
         public ActionResult UserActivate(Guid id)
         {
-            NoteUserManager num = new NoteUserManager();
-            BusinessLayerResult<NoteUser> res= num.ActivateUser(id);
+            BusinessLayerResult<NoteUser> res= noteUserManager.ActivateUser(id);
 
             if (res.Errors.Count>0)
             {

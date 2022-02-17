@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,9 +12,10 @@ namespace EntiyLayers
     [Table("Categories")]
     public class Category : EntityBase
     {
-        [Required,StringLength(50)]
+        [DisplayName("Başlık"), Required(ErrorMessage ="{0} alanı gereklidir."),StringLength(50, ErrorMessage = "{0} alanı max. {1} karekter içermeli.")]
         public string Title { get; set; }
-        [StringLength(150)]
+        
+        [DisplayName("Açıklama"), StringLength(150, ErrorMessage = "{0} alanı max. {1} karekter içermeli.")]
         public string Description { get; set; }
 
         //Categoryinin notları var.İlişkisel olduğu için virtual olarak tanımladım.

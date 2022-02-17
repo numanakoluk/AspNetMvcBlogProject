@@ -1,4 +1,6 @@
-﻿using Common.Helpers;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Results;
+using Common.Helpers;
 using DataAccessLayer.EntityFramework;
 using EntiyLayers;
 using EntiyLayers.Messages;
@@ -11,9 +13,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class NoteUserManager
+    public class NoteUserManager : ManagerBase<NoteUser>
     {
-        private Repository<NoteUser> repo_user = new Repository<NoteUser>();
        public BusinessLayerResult<NoteUser> RegisterUser(RegisterViewModel data)
         {
             //Kullanıcı username kontrolü
@@ -21,7 +22,7 @@ namespace BusinessLayer
             //Kayıt işlemi
             //Kayıt işlemi
             //Aktivasyon e-postası gönderimi.
-           NoteUser user= repo_user.Find(x => x.UserName == data.Username || x.Email == data.Email);
+           NoteUser user= Find(x => x.UserName == data.Username || x.Email == data.Email);
            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
             if (user!=null)
             {
@@ -36,7 +37,7 @@ namespace BusinessLayer
             }
             else
             {
-                int dbresult=repo_user.Insert(new NoteUser()
+                int dbresult=Insert(new NoteUser()
                 {
                     UserName = data.Username,
                     Email = data.Email,
@@ -51,7 +52,7 @@ namespace BusinessLayer
                 });
                  if(dbresult>0)
                 {
-                    res.Result= repo_user.Find(x => x.Email == data.Email && x.UserName == data.Username);
+                    res.Result= Find(x => x.Email == data.Email && x.UserName == data.Username);
                     //TODO: aktivasyon maili atılacak.
                     string siteUri = ConfigHelper.Get<string>("SiteRootUri");
                     string activateUri = $"{siteUri}/Home/UserActivate/{res.Result.ActivateGuid}";
@@ -66,7 +67,7 @@ namespace BusinessLayer
         public BusinessLayerResult<NoteUser> GetUserByID(int id)
         {
             BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
-            res.Result = repo_user.Find(x => x.Id == id);
+            res.Result = Find(x => x.Id == id);
             if (res.Result == null)
             {
                 res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı Bulunamadı.");
@@ -80,7 +81,7 @@ namespace BusinessLayer
             //Hesap Aktive Edilmiş mi?
             
             BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
-            res.Result = repo_user.Find(x => x.UserName == data.Username && x.Password == data.Password);
+            res.Result = Find(x => x.UserName == data.Username && x.Password == data.Password);
             
             if (res.Result != null)
             {
@@ -103,7 +104,7 @@ namespace BusinessLayer
         public BusinessLayerResult<NoteUser> ActivateUser(Guid activateId)
         {
             BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
-            res.Result = repo_user.Find(x => x.ActivateGuid == activateId);
+            res.Result = Find(x => x.ActivateGuid == activateId);
 
             if (res.Result != null)
             {
@@ -113,7 +114,7 @@ namespace BusinessLayer
                     return res;
                 }
                 res.Result.IsActive = true;
-                repo_user.Update(res.Result);
+                Update(res.Result);
             }
 
             else
@@ -128,7 +129,7 @@ namespace BusinessLayer
 
         public BusinessLayerResult<NoteUser> UpdateProfile(NoteUser data)
         {
-            NoteUser db_user = repo_user.Find(x => x.Id != data.Id && (x.UserName == data.UserName || x.Email == data.Email));
+            NoteUser db_user = Find(x => x.Id != data.Id && (x.UserName == data.UserName || x.Email == data.Email));
             BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
 
             if (db_user != null && db_user.Id != data.Id)
@@ -146,7 +147,7 @@ namespace BusinessLayer
                 return res;
             }
 
-            res.Result = repo_user.Find(x => x.Id == data.Id);
+            res.Result = Find(x => x.Id == data.Id);
             res.Result.Email = data.Email;
             res.Result.Name = data.Name;
             res.Result.Surname = data.Surname;
@@ -158,7 +159,7 @@ namespace BusinessLayer
                 res.Result.ProfileImageFileName = data.ProfileImageFileName;
             }
 
-            if (repo_user.Update(res.Result) == 0)
+            if (Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
             }
@@ -172,10 +173,10 @@ namespace BusinessLayer
             
             
             BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
-            NoteUser user = repo_user.Find(x => x.Id == id);
+            NoteUser user = Find(x => x.Id == id);
             if (user!= null)
             {
-                if (repo_user.Delete(user) ==0)
+                if (Delete(user) ==0)
                 {
                     res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı Silinemedi.");
                     return res;
