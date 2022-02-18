@@ -24,15 +24,19 @@ namespace EntiyLayers
         [DisplayName("Şifre"), Required(ErrorMessage = "{0} alanı gereklidir."), StringLength(25, ErrorMessage = "{0} alanı max. {1} karakter olmalıdır.")]
         public string Password { get; set; }
 
-        [StringLength(30)] //kullanıcı_12.jpg gibi
+        [StringLength(30),ScaffoldColumn(false)] //kullanıcı_12.jpg gibi //ScaffoldColumn üretilirken istemiyorum.
         public string ProfileImageFileName { get; set; }
 
         //Aktif mi kullanıcı?
+        [DisplayName("Is Active")]
         public bool IsActive { get; set; }
+
+        [DisplayName("Is Admin")]
+
         public bool IsAdmin { get; set; }
 
         //Kullanıcı için oluşturulan şifreli string kodu.Guid, benzersiz değerler oluşturmak için kullanılmaktadır
-        [Required]
+        [Required,ScaffoldColumn(false)]
         public Guid ActivateGuid { get; set; }
         
         
