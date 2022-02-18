@@ -22,5 +22,19 @@ namespace DataAccessLayer.EntityFramework
         {
             Database.SetInitializer(new MyInitilaizer());
         }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    // FluentAPI İlişkili tablo silme yöntemi
+
+        //    modelBuilder.Entity<Note>()
+        //        .HasMany(n => n.Comments)
+        //        .WithRequired(c => c.Note)
+        //        .WillCascadeOnDelete(true);
+
+        //    modelBuilder.Entity<Note>()
+        //        .HasMany(n => n.Likes)
+        //        .WithRequired(c => c.Note)
+        //        .WillCascadeOnDelete(true);
+        //}
     }
 }
