@@ -15,7 +15,8 @@ namespace BusinessLayer
 {
     public class NoteUserManager : ManagerBase<NoteUser>
     {
-       public BusinessLayerResult<NoteUser> RegisterUser(RegisterViewModel data)
+        //AnaSayfa Metodları.
+        public BusinessLayerResult<NoteUser> RegisterUser(RegisterViewModel data)
         {
             //Kullanıcı username kontrolü
             //Kullanıcı e-posta kontrolü

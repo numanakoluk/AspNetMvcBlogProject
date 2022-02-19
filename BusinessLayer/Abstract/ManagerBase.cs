@@ -13,37 +13,37 @@ namespace BusinessLayer.Abstract
     public abstract class ManagerBase<T> : IDataAccess<T> where T:class
     {
         private Repository<T> repo = new Repository<T>();
-        public int Delete(T obj)
+        public virtual int Delete(T obj) //Methodu bazı yerlerde ezmek için virtual yapıyorum
         {
             return repo.Delete(obj);
         }
 
-        public T Find(Expression<Func<T, bool>> where)
+        public virtual T Find(Expression<Func<T, bool>> where)
         {
             return repo.Find(where);
         }
 
-        public int Insert(T obj)
+        public virtual int Insert(T obj)
         {
             return repo.Insert(obj);
         }
 
-        public List<T> List()
+        public virtual List<T> List()
         {
             return repo.List();
         }
 
-        public List<T> List(Expression<Func<T, bool>> where)
+        public virtual List<T> List(Expression<Func<T, bool>> where)
         {
             return repo.List(where);
         }
 
-        public IQueryable<T> ListQueryable()
+        public virtual IQueryable<T> ListQueryable()
         {
             return repo.ListQueryable();
         }
 
-        public int Save()
+        public virtual int Save()
         {
             return repo.Save();
         }
