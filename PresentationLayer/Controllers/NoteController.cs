@@ -8,19 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using EntiyLayers;
-using PresentationLayer.Data;
+using PresentationLayer.Models;
 
 namespace PresentationLayer.Controllers
 {
     public class NoteController : Controller
     {
         NoteManager noteManager = new NoteManager();
+        CategoryManager categoryManager = new CategoryManager(); 
 
         public ActionResult Index()
         {
 
-
-            var notes = db.Notes.Include(n => n.Category);
+            //Sorgulanabilir tabloyu IQuaryable ile alıyorum.Include ile diğer tabloları da çeksin.Iquaryable ile Select * from note tablosu çekildi.Quarayble döndüğü zaman sorgu çalışmayacak.Include ile Category'i join edecek
+            var notes = noteManager.ListQueryable().Include("Category").Where(x => x.Owner.Id == CurrentSession.User.Id).OrderByDescending(x => x.ModifiedOn);
             return View(notes.ToList());
         }
 
@@ -30,7 +31,7 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = db.Notes.Find(id);
+            Note note = noteManager.Find(x=>x.Id==id);
             if (note == null)
             {
                 return HttpNotFound();
@@ -40,7 +41,7 @@ namespace PresentationLayer.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Title");
+            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title");
             return View();
         }
 
@@ -51,12 +52,11 @@ namespace PresentationLayer.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Notes.Add(note);
-                db.SaveChanges();
+                noteManager.Insert(note);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Title", note.CategoryId);
+            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
             return View(note);
         }
 
@@ -66,12 +66,12 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = db.Notes.Find(id);
+            Note note = noteManager.Find(x => x.Id == id);
             if (note == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Title", note.CategoryId);
+            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
             return View(note);
         }
 
@@ -85,7 +85,7 @@ namespace PresentationLayer.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Title", note.CategoryId);
+            ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
             return View(note);
         }
 
@@ -95,7 +95,7 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Note note = db.Notes.Find(id);
+            Note note = noteManager.Find(x => x.Id == id);
             if (note == null)
             {
                 return HttpNotFound();
@@ -107,9 +107,8 @@ namespace PresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Note note = db.Notes.Find(id);
-            db.Notes.Remove(note);
-            db.SaveChanges();
+            Note note = noteManager.Find(x => x.Id == id);
+            noteManager.Delete(note);
             return RedirectToAction("Index");
         }
 
