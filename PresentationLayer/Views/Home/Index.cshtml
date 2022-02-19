@@ -112,8 +112,42 @@
             $("#modal_comment_body").load("/Comment/ShowNoteComments/" + noteid);
     })
     });
-    function doComment() {
+    function doComment(btn, e, commentid, spanid) {
 
+
+        var button = $(btn); //jquery'le gelen elementleri karşılamak için bunu kullanmak gerek.
+        var mode = button.data("edit-mode");
+        
+
+        if (e === "edit_clicked")
+        {
+            //ilk tıkladığımızda modu false çevirecek.Sonrakinde true'ye çevirecek.
+            if (!mode)
+           {
+                button.data("edit-mode", true);
+                button.removeClass("btn-warning");
+                button.addClass("btn-success");
+                var btnSpan = button.find("span");
+                btnSpan.removeClass("glyphicon-edit");
+                btnSpan.addClass("glyphicon-ok");
+
+                //Mod editse bunu yap.
+                $(spanid).attr("contenteditable", true);
+            }
+            else
+            {
+
+                button.data("edit-mode", false);
+                button.addClass("btn-warning");
+                button.removeClass("btn-success");
+                var btnSpan = button.find("span");
+                btnSpan.addClass("glyphicon-edit");
+                btnSpan.removeClass("glyphicon-ok");
+
+                //Mod editse bunu yap.
+                $(spanid).attr("contenteditable", false);
+            }
+        }
     }
 
 </script>
