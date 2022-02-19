@@ -38,7 +38,8 @@ namespace BusinessLayer
             }
             else
             {
-                int dbresult=Insert(new NoteUser()
+                //Base Classa' insert et
+                int dbresult=base.Insert(new NoteUser()
                 {
                     UserName = data.Username,
                     Email = data.Email,
@@ -160,7 +161,7 @@ namespace BusinessLayer
                 res.Result.ProfileImageFileName = data.ProfileImageFileName;
             }
 
-            if (Update(res.Result) == 0)
+            if (base.Update(res.Result) == 0)
             {
                 res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
             }
@@ -188,6 +189,83 @@ namespace BusinessLayer
                 //Admin silme durumu..
                 res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı Bulunumadı.");
             }
+            return res;
+        }
+
+        //Method hiding yapıyoruz..
+        public new BusinessLayerResult<NoteUser> Insert(NoteUser data)
+        {
+            //Kullanıcı username kontrolü
+            //Kullanıcı e-posta kontrolü
+            //Kayıt işlemi
+            //Kayıt işlemi
+            //Aktivasyon e-postası gönderimi.
+            NoteUser user = Find(x => x.UserName == data.UserName || x.Email == data.Email);
+            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
+
+            res.Result = data;
+
+            if (user != null)
+            {
+                if (user.UserName == data.UserName)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı Adı Kayıtlı");
+                }
+                if (user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-Posta Adresi Kayıtlı");
+                }
+            }
+            else
+            {
+                //Base Classdaki ınsert'i kullan.
+                res.Result.ProfileImageFileName = "user.png";
+                res.Result.ActivateGuid = Guid.NewGuid();
+
+                if(base.Insert(res.Result) ==0)
+                {
+                    res.AddError(ErrorMessageCode.UserCouldNotInserted, "Kullanıcı Eklenemedi.");
+                }
+
+            }
+            return res;
+        }
+
+        public new BusinessLayerResult<NoteUser> Update(NoteUser data)
+        {
+            NoteUser db_user = Find(x => x.Id != data.Id && (x.UserName == data.UserName || x.Email == data.Email));
+            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
+            res.Result = data;
+            if (db_user != null && db_user.Id != data.Id)
+            {
+                if (db_user.UserName == data.UserName)
+                {
+                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                }
+
+                if (db_user.Email == data.Email)
+                {
+                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-posta adresi kayıtlı.");
+                }
+
+                return res;
+            }
+
+            res.Result = Find(x => x.Id == data.Id);
+            res.Result.Email = data.Email;
+            res.Result.Name = data.Name;
+            res.Result.Surname = data.Surname;
+            res.Result.Password = data.Password;
+            res.Result.UserName = data.UserName;
+            res.Result.IsActive = data.IsActive;
+            res.Result.IsAdmin = data.IsAdmin;
+
+
+            if (base.Update(res.Result) == 0)
+            {
+                res.AddError(ErrorMessageCode.UserCouldtNotUpdated, "Kullanıcı güncellenemedi.");
+            }
+
             return res;
         }
     }

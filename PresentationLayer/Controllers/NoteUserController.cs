@@ -43,9 +43,19 @@ namespace PresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(NoteUser noteUser)
         {
+            //Bu bilgileri kontrol etme.
+            ModelState.Remove("CreatedOn");
+            ModelState.Remove("ModifiedOn");
+            ModelState.Remove("ModifiedUserName");
+
             if (ModelState.IsValid)
             {
-                //BusinessLayerResult<NoteUser> res = noteUserManager.Insert(noteUser);
+                BusinessLayerResult<NoteUser> res = noteUserManager.Insert(noteUser);
+                if (res.Errors.Count>0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x.Message)); //Validation summary'de çıkmasını sağlıyor.
+                    return View(noteUser);
+                }
                 return RedirectToAction("Index");
             }
 
@@ -72,9 +82,17 @@ namespace PresentationLayer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(NoteUser noteUser)
         {
+            ModelState.Remove("CreatedOn");
+            ModelState.Remove("ModifiedOn");
+            ModelState.Remove("ModifiedUserName");
             if (ModelState.IsValid)
             {
-                //Todo: Düzenlenecek
+                BusinessLayerResult<NoteUser> res = noteUserManager.Update(noteUser);
+                if (res.Errors.Count > 0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x.Message)); //Validation summary'de çıkmasını sağlıyor.
+                    return View(noteUser);
+                }
                 return RedirectToAction("Index");
             }
             return View(noteUser);

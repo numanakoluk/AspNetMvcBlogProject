@@ -18,6 +18,8 @@ namespace EntiyLayers.Messages
         ActivateIdDoesNotExists=155,
         UserNotFound =156,
         ProfileCouldNotUpdated = 157,
-        UserCouldNotRemove = 158
+        UserCouldNotRemove = 158,
+        UserCouldNotInserted = 159,
+        UserCouldtNotUpdated = 160
     }
 }
