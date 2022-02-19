@@ -78,13 +78,13 @@
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">
-                                    <!--Herhangi bir butona bastığımızda pop-up(modal_comment açılacak)-->
-                                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment">
+                                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_comment" data-note-id="@note.Id">
                                         <span class="glyphicon glyphicon-comment"></span> Yorumlar
                                     </button>
                                 </p>
                                 <p>
-                                    <button class="btn btn-default btn-sm" type="button">
+                                    <button class="btn btn-default btn-sm" type="button" data-liked="false" data-note-id="@note.Id">
+                                        <span class="glyphicon glyphicon-star-empty like-star"></span>&nbsp;
                                         <span class="like-count">@note.LikeCount</span>
                                     </button>
                                 </p>
@@ -107,8 +107,13 @@
 <script>
     $(function () {
         $('#modal_comment').on('show.bs.modal', function (e) {
-            $("#modal_comment_body").load("/Comment/ShowNoteComments")
-            console.log('test');
+            var btn = $(e.relatedTarget);
+            var noteid = btn.data("note-id"); //Bu attributedeki değeri döndürecek.
+            $("#modal_comment_body").load("/Comment/ShowNoteComments/" + noteid);
     })
     });
+    function doComment() {
+
+    }
+
 </script>
