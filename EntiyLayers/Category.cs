@@ -12,7 +12,7 @@ namespace EntiyLayers
     [Table("Categories")]
     public class Category : EntityBase
     {
-        [DisplayName("Başlık"), Required(ErrorMessage ="{0} alanı gereklidir."),StringLength(50, ErrorMessage = "{0} alanı max. {1} karekter içermeli.")]
+        [DisplayName("Kategori"), Required(ErrorMessage ="{0} alanı gereklidir."),StringLength(50, ErrorMessage = "{0} alanı max. {1} karekter içermeli.")]
         public string Title { get; set; }
         
         [DisplayName("Açıklama"), StringLength(150, ErrorMessage = "{0} alanı max. {1} karekter içermeli.")]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,16 +12,22 @@ namespace EntiyLayers
     [Table("Notes")]
     public class Note : EntityBase
     {
-        [Required, StringLength(60)]
+        [DisplayName("Not Başlığı"), Required, StringLength(60)]
         public string Title { get; set; }
-        [Required, StringLength(2000)]
+        [DisplayName("Not Metni"), Required, StringLength(2000)]
         public string Text { get; set; }
         //Taslak mı ?
+        [DisplayName("Taslak")]
+
         public bool IsDraft { get; set; }
         //Likelanacak notlar.
+        [DisplayName("Beğenilme")]
+
         public int LikeCount { get; set; }
 
         //Bunu Yazmazsak eğer Gözükmez ve sorguyu tekrar tekrar çeker.
+        [DisplayName("Kategori")]
+
         public int CategoryId { get; set; }
 
         //Bir notun bir tane sahibi olabilir
