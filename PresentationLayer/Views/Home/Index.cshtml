@@ -8,9 +8,9 @@
     <div class="row">
         <div class="col-md-3">
             <!----Kategoriler-->
-            @Html.Partial("_PartialCategories")       
+            @Html.Partial("_PartialCategories")
         </div>
-        
+
         <div class="col-md-9">
             <!----CarouselYanaOynayanSekme-->
             <div class="row carousel-holder">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Notlar -->
             <div class="row">
                 @foreach (Note note in Model)
@@ -51,7 +51,7 @@
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="@note.Title">
                             <div class="caption">
                                 <h4>
-                                    <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id">
+                                    <a href="#">
                                         @note.Title
                                     </a>
                                 </h4>
@@ -64,7 +64,7 @@
                                 {
                                     <p>@(note.Text.Substring(0, 75) + "...")</p>
                                     <p class="pull-right">
-                                        <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id" class="btn btn-default btn-sm">devamı <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a href="#" class="btn btn-default btn-sm">devamı <span class="glyphicon glyphicon-chevron-right"></span></a>
                                     </p>
                                 }
                                 else
@@ -94,15 +94,15 @@
                 }
             </div>
         </div>
-        </div>
     </div>
+</div>
 <!--İlgili sectionu çağırıyorum.Burada sectionu doldurmak istediğimi söyledim.-->
 @section footer{
     @Html.Partial("_PartialFooter")
 
- }
+}
 <!--Devamlı Pop up eklememek için bootstrap helperi kullancam.-->
-@BootStrap.ModalPopup(id : "modal_comment", title : "Yorumlar")
+@BootStrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
 
 <script>
     var noteid = -1; //başta -1 dönsün dışarıdan başka yerden atayabileyim.
@@ -113,7 +113,7 @@
             var btn = $(e.relatedTarget);
             noteid = btn.data("note-id"); //Bu attributedeki değeri döndürecek.
             $(modalCommentBodyId).load("/Comment/ShowNoteComments/" + noteid);
-    })
+        })
     });
     function doComment(btn, e, commentid, spanid) {
 
@@ -158,7 +158,7 @@
 
 
                 var txt = $(spanid).text();
-                //ajax 
+                //ajax
                 $.ajax({
                     method: "POST",
                     url: "/Comment/Edit/" + commentid,
@@ -221,6 +221,87 @@
             }).fail(function () {
                 alert("Sunucu ile bağlantı kurulamadı.");
             });
-        } 
+        }
     }
+</script>
+
+<script>
+    $(function () {
+
+        var noteids = [];
+
+        $("div[data-note-id]").each(function (i, e) {
+            noteids.push($(e).data("note-id"));
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "/Note/GetLiked",
+            data: { ids: noteids }
+        }).done(function (data) {
+     
+
+            if (data.result != null && data.result.length > 0) {
+                for (var i = 0; i < data.result.length; i++) {
+                    var id = data.result[i];
+                    var likedNote = $("div[data-note-id=" + id + "]");
+                    var btn = likedNote.find("button[data-liked]");
+                    var span = btn.children().first();
+
+                    btn.data("liked", true);
+                    span.removeClass("glyphicon-star-empty");
+                    span.addClass("glyphicon-star");
+                }
+
+            }
+
+        }).fail(function () {
+
+        });
+
+        $("button[data-liked]").click(function () {
+            var btn = $(this);
+            var liked = btn.data("liked");
+            var noteid = btn.data("note-id");
+            var spanStar = btn.find("span.like-star");
+            var spanCount = btn.find("span.like-count");
+
+            console.log(liked);
+            console.log("like count : " + spanCount.text());
+
+            $.ajax({
+                method: "POST",
+                url: "/Note/SetLikeState",
+                data: { "noteid": noteid, "liked": !liked }
+            }).done(function (data) {
+
+                console.log(data);
+
+                if (data.hasError) {
+                    alert(data.errorMessage);
+                } else {
+                    liked = !liked;
+                    btn.data("liked", liked);
+                    spanCount.text(data.result);
+
+                    console.log("like count(after) : " + spanCount.text());
+
+
+                    spanStar.removeClass("glyphicon-star-empty");
+                    spanStar.removeClass("glyphicon-star");
+
+                    if (liked) {
+                        spanStar.addClass("glyphicon-star");
+                    } else {
+                        spanStar.addClass("glyphicon-star-empty");
+                    }
+
+                }
+
+            }).fail(function () {
+                alert("Sunucu ile bağlantı kurulamadı.");
+            })
+
+        });
+    });
 </script>
