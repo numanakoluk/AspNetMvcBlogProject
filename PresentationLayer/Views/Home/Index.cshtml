@@ -64,7 +64,7 @@
                                 {
                                     <p>@(note.Text.Substring(0, 75) + "...")</p>
                                     <p class="pull-right">
-                                        <a href="#" class="btn btn-default btn-sm">devamı <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id" class="btn btn-default btn-sm">devamı <span class="glyphicon glyphicon-chevron-right"></span></a>
                                     </p>
                                 }
                                 else
@@ -103,6 +103,7 @@
 }
 <!--Devamlı Pop up eklememek için bootstrap helperi kullancam.-->
 @BootStrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@BootStrap.ModalPopup(id: "modal_notedetail", title:"Not Detayı")
 
 <script>
     var noteid = -1; //başta -1 dönsün dışarıdan başka yerden atayabileyim.
