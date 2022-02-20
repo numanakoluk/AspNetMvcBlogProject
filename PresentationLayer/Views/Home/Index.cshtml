@@ -23,13 +23,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img class="slide-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="">
+                                <img class="slide-image" src="https://www.wpsitesi.com/wp-content/uploads/2016/01/reklam-ekleme.jpg" alt="">
                             </div>
                             <div class="item">
-                                <img class="slide-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="">
+                                <img class="slide-image" src="https://www.wpsitesi.com/wp-content/uploads/2016/01/reklam-ekleme.jpg" alt="">
                             </div>
                             <div class="item">
-                                <img class="slide-image" src="http://placehold.jp/3d4070/ffffff/800x300.png" alt="">
+                                <img class="slide-image" src="https://www.wpsitesi.com/wp-content/uploads/2016/01/reklam-ekleme.jpg" alt="">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -48,10 +48,10 @@
                 {
                     <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="@note.Id">
                         <div class="thumbnail">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="@note.Title">
+                            <img src="https://picsum.photos/320/150?random=@(Model.IndexOf(note) % 10)" alt="@note.Title">
                             <div class="caption">
                                 <h4>
-                                    <a href="#">
+                                    <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id">
                                         @note.Title
                                     </a>
                                 </h4>
@@ -304,5 +304,19 @@
             })
 
         });
+    });
+</script>
+
+<script>
+    $(function () {
+
+        $('#modal_notedetail').on('show.bs.modal', function (e) {
+
+            var btn = $(e.relatedTarget);
+            noteid = btn.data("note-id");
+
+            $("#modal_notedetail_body").load("/Note/GetNoteText/" + noteid);
+        })
+
     });
 </script>
