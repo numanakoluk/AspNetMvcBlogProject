@@ -27,7 +27,8 @@ namespace PresentationLayer.Controllers
             //    return View(TempData["mm"] as List<Note>);
             //}
             
-            return View(noteManager.ListQueryable().OrderByDescending(x=>x.ModifiedOn).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
+            //Draft olmayanlar gelsin için where sorgusu ekledim.
+            return View(noteManager.ListQueryable().Where(x=>x.IsDraft == false).OrderByDescending(x=>x.ModifiedOn).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
             //return View(nm.GetAllNote().OrderByDescending(x=>x.ModifiedOn).ToList()); //Sql Tarafından 
 
         }
@@ -37,14 +38,20 @@ namespace PresentationLayer.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Category cat = categoryManager.Find(x=>x.Id == id.Value); //value ile ilgili değeri getir.
+            //Category cat = categoryManager.Find(x=>x.Id == id.Value); //value ile ilgili değeri getir.
 
-            if (cat == null)
-            {
-                return HttpNotFound();
-                //return RedirectToAction("Index", "Home"); // Bu da olabilirdi
-            }
-            return View("Index", cat.Notes.OrderByDescending(x=>x.ModifiedOn).ToList());
+            //if (cat == null)
+            //{
+            //    return HttpNotFound();
+            //    //return RedirectToAction("Index", "Home"); // Bu da olabilirdi
+            //}
+
+            //Notları çekip direk aktaracak.
+            List<Note> notes = noteManager.ListQueryable().Where(
+                x => x.IsDraft == false && x.CategoryId == id).OrderByDescending(
+                x => x.ModifiedOn).ToList();
+
+            return View("Index", notes);
         }
         public ActionResult MostLiked()
         {
