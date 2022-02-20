@@ -8,15 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using EntiyLayers;
+using PagedList;
+using PagedList.Mvc;
 
 namespace PresentationLayer.Controllers
 {
     public class CategoryController : Controller
     {
         private CategoryManager categoryManager = new CategoryManager(); 
-        public ActionResult Index()
+        public ActionResult Index(int sayfa= 1)
         {
-            return View(categoryManager.List());
+            return View(categoryManager.List().ToPagedList(sayfa, 3));
         }
 
         public ActionResult Details(int? id)

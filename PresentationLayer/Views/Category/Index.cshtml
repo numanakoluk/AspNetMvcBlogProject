@@ -1,14 +1,19 @@
-﻿@model IEnumerable<EntiyLayers.Category>
+﻿@model PagedList.IPagedList<EntiyLayers.Category>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Kategoriler";
 }
+
+
+
 <div class="row">
-    <div class="col-md-10 col-md-offset-1"> 
-    <h2>Kategoriler</h2>
+    <div class="col-md-10 col-md-offset-1">
+        <h2>Kategoriler</h2>
         <hr />
     </div>
-    </div>
+</div>
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <p>
@@ -20,19 +25,19 @@
         <table class="table">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(model => model.First().Title)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.First().Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreatedOn)
+                    @Html.DisplayNameFor(model => model.First().CreatedOn)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ModifiedOn)
+                    @Html.DisplayNameFor(model => model.First().ModifiedOn)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ModifiedUserName)
+                    @Html.DisplayNameFor(model => model.First().ModifiedUserName)
                 </th>
                 <th></th>
             </tr>
@@ -65,13 +70,13 @@
                         <a href="/Category/Delete/@item.Id " class="btn btn-danger btn-sm" title="Delete">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
-              
+
                     </td>
                 </tr>
             }
 
         </table>
-
+        @Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }))
     </div>
-   
+
 </div>
