@@ -2,7 +2,8 @@
 using BusinessLayer.Results;
 using EntiyLayers;
 using EntiyLayers.Messages;
-using EntiyLayers.ValueObjects;
+using EntiyLayers.RegisterViewModel;
+using EntiyLayers.ViewModel;
 using PresentationLayer.ViewModels;
 using System;
 using System.Collections.Generic;

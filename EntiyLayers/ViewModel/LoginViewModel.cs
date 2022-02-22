@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EntiyLayers.ValueObjects
+namespace EntiyLayers.ViewModel
 {
     public class LoginViewModel
     {

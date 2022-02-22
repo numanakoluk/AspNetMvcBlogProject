@@ -4,35 +4,38 @@
 
 .main-content {
     /*    background-color:#009edf;*/
-    border: 2px solid #e7e7e7;
+    border: 2px solid #5cb85c	;
     margin: 0 auto;
     max-width: 500px;
     padding: 20px 40px;
     color: #ccc;
     text-shadow: none;
+    
 }
-
+.h1 {
+    font-weight: bold;
+}
 
 .input-group {
     margin: 20px 0px;
 }
 
 .input-group-addon {
-    color: #e7e7e7;
+    color: black;
     font-size: 17px;
 }
 
 .login-button {
     margin: 0px auto;
     max-width: 200px;
-    
 }
 
 
 .form-header {
+    border: 2px solid #5cb85c;
     max-width: 500px;
     margin: 0 auto;
-    background-color: #e7e7e7;
+    background-color: #5cb85c;
     color: #fff;
     width: 100%;
     padding: 20px 0px;
@@ -43,5 +46,3 @@
 .remember {
     color: black;
 }
-
-
