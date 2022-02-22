@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer
 {
-    public class CommentManager:ManagerBase<Comment>
+   public class AboutManager:ManagerBase<About>
     {
-
-
 
     }
 }

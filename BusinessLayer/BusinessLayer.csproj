@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutManager.cs" />
     <Compile Include="CommentManager.cs" />
     <Compile Include="LikedManager.cs" />
     <Compile Include="Results\BusinessLayerResult.cs" />

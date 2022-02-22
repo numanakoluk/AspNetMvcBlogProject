@@ -17,6 +17,7 @@ namespace PresentationLayer.Controllers
         private NoteManager noteManager = new NoteManager();
         private CategoryManager categoryManager = new CategoryManager();
         private NoteUserManager noteUserManager = new NoteUserManager();
+        private AboutManager aboutManager = new AboutManager();
 
         // GET: Home
         public ActionResult Index()
@@ -60,6 +61,11 @@ namespace PresentationLayer.Controllers
         }
         public ActionResult About()
         {
+
+            aboutManager.List();
+
+
+
             return View();
         }
         //Profil Goruntuleme

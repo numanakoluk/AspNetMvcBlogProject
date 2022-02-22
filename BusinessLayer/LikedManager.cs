@@ -10,5 +10,8 @@ namespace BusinessLayer
 {
     public class LikedManager :ManagerBase<Liked>
     {
+
+
+
     }
 }

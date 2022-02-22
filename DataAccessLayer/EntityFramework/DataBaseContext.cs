@@ -17,6 +17,8 @@ namespace DataAccessLayer.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<Liked> Likes { get; set; }
 
+        public DbSet<About> Abouts { get; set; }
+
         //++
         public DataBaseContext()
         {

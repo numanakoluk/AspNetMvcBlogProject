@@ -55,6 +55,15 @@
     <Compile Include="EntityFramework\Repository.cs" />
     <Compile Include="EntityFramework\RepositoryBase.cs" />
     <Compile Include="EntityFramework\MyInitilaizer.cs" />
+    <Compile Include="Migrations\202202131712291_InitialCreate.cs" />
+    <Compile Include="Migrations\202202131712291_InitialCreate.Designer.cs">
+      <DependentUpon>202202131712291_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202211547042_1.cs" />
+    <Compile Include="Migrations\202202211547042_1.Designer.cs">
+      <DependentUpon>202202211547042_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySql\Repository.cs" />
     <Compile Include="MySql\RepositoryBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +88,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202202131712291_InitialCreate.resx">
+      <DependentUpon>202202131712291_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202211547042_1.resx">
+      <DependentUpon>202202211547042_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

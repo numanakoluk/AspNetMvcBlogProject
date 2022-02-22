@@ -49,6 +49,14 @@ namespace DataAccessLayer.EntityFramework
             //Ekle
             context.NoteUsers.Add(admin);
             context.NoteUsers.Add(standartUser);
+            About about = new About()
+            {
+                
+                AboutFileImageName = "ABCd",
+                AboutText = "ABCD"
+            };
+            
+            context.Abouts.Add(about);
 
             //8 Değer ekle...
             for (int i = 0; i < 8; i++)
