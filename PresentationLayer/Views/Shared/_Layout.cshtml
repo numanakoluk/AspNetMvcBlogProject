@@ -23,6 +23,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
     <!--LayoutGözükeceklerAyıklama-->
     @{ 
@@ -32,7 +33,12 @@
             user = Session["login"] as NoteUser;
         }
     }
-
+ 
+@*<style>
+    .glyphicon {
+        color: #5cb85c
+    }
+</style>*@
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -44,7 +50,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Home/Index"><span class="glyphicon glyphicon-xbt"></span>log Site</a>
+                <a class="navbar-brand" href="/Home/Index"><span class="glyphicon glyphicon-xbt" style="color: #5cb85c"></span>log Site</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -53,24 +59,24 @@
                     {
                         <li class="dropdown">
                             <a href="/Note/MyNotes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-wrench"></span>Yönetim <span class="caret"></span>
+                            <span class="glyphicon glyphicon-wrench" style="color: #5cb85c"></span>Yönetim <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="/Note/Create"><span class="glyphicon glyphicon-plus"></span>Not Ekle</a></li>
-                                <li><a href="/Note/Index"><span class="glyphicon glyphicon-th-list"></span>Notlarım</a></li>
-                                <li><a href="/Note/MyLikedNotes"><span class="glyphicon glyphicon glyphicon-heart"></span>Beğendiklerim</a></li>
+                                <li><a href="/Note/Create"><span class="glyphicon glyphicon-plus" style="color: #5cb85c"></span>Not Ekle</a></li>
+                                <li><a href="/Note/Index"><span class="glyphicon glyphicon-th-list" style="color: #5cb85c"></span>Notlarım</a></li>
+                                <li><a href="/Note/MyLikedNotes"><span class="glyphicon glyphicon glyphicon-heart" style="color: #5cb85c"></span>Beğendiklerim</a></li>
                                 @if (user.IsAdmin)
                                 {
                                     <li role="separator" class="divider"></li>
 
-                                    <li><a href="/Category/Create"><span class="glyphicon glyphicon-plus">
+                                    <li><a href="/Category/Create"><span class="glyphicon glyphicon-plus" style="color: #5cb85c">
                                          </span>Kategori Ekle</a></li>
-                                    <li><a href="/Category/Index"><span class="glyphicon glyphicon-th-list">
+                                    <li><a href="/Category/Index"><span class="glyphicon glyphicon-th-list" style="color: #5cb85c">
                                          </span>Kategoriler</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="/NoteUser/Create"><span class="glyphicon glyphicon-plus">
+                                    <li><a href="/NoteUser/Create"><span class="glyphicon glyphicon-plus" style="color: #5cb85c">
                                          </span>Kullanıcı Ekle</a></li>
-                                    <li><a href="/NoteUser/Index"><span class="glyphicon glyphicon-th-list">
+                                    <li><a href="/NoteUser/Index"><span class="glyphicon glyphicon-th-list" style="color: #5cb85c">
                                          </span>Kullanıcılar</a></li>
                                 }
                             </ul>
@@ -79,17 +85,17 @@
 
                     <li>
                         <a href="/Home/MostLiked">
-                            <span class="glyphicon glyphicon-heart-empty"></span>En Beğenilenler
+                            <span class="glyphicon glyphicon-heart" style="color: #5cb85c"></span>En Beğenilenler
                         </a>
                     </li>
                     <li>
                         <a href="/Home/Index">
-                            <span class="glyphicon glyphicon-th-list"></span>Son Yazılanlar
+                            <span class="glyphicon glyphicon-th-list" style="color: #5cb85c"></span>Son Yazılanlar
                         </a>
                     </li>
                     <li>
                         <a href="/Home/About">
-                            <span class="glyphicon glyphicon-info-sign"></span>Hakkımızda
+                            <span class="glyphicon glyphicon-info-sign" style="color: #5cb85c"></span>Hakkımızda
                         </a>
                     </li>
 
@@ -101,14 +107,14 @@
                         <li>
                             <a href="/Home/Login">
                                 Giriş
-                                <span class="glyphicon glyphicon-log-in"></span>
+                                <span class="glyphicon glyphicon-log-in" style="color: #5cb85c"></span>
                             </a>
                         </li>
 
                         <li>
                             <a href="/Home/Register">
                                 Üye Ol
-                                <span class="glyphicon glyphicon-user"></span>
+                                <span class="glyphicon glyphicon-user" style="color: #5cb85c "></span>
                             </a>
                         </li>
                     }
@@ -117,17 +123,17 @@
 
                     <li class="dropdown">
                         <a href="/Home/ShowProfile" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="glyphicon glyphicon-user"></span>@user.UserName <span class="caret"></span>
+                            <span class="glyphicon glyphicon-user" style="color: #f0ad4e "></span>@user.UserName <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/Home/ShowProfile"><span class="glyphicon glyphicon-user"></span>Profili Göster</a></li>
+                                <a href="/Home/ShowProfile"><span class="glyphicon glyphicon-user" style="color: #0275d8 "></span>Profili Göster</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="/Home/EditProfile"><span class="glyphicon glyphicon-edit"></span>Profili Düzenle</a></li>
+                                <a href="/Home/EditProfile"><span class="glyphicon glyphicon-edit" style="color: #5cb85c"></span>Profili Düzenle</a></li>
                             <li>
                                 <a href="Home/DeleteProfile" onclick="return confirm('Hesabınızı Silmek İstediğinize emin misiniz?');">
-                                  <span class="glyphicon glyphicon-trash"></span>Profili Sil</a>
+                                  <span class="glyphicon glyphicon-trash" style="color: #d9534f "></span>Profili Sil</a>
                             </li>
 
                         </ul>
@@ -136,7 +142,7 @@
                     <li>
                         <a href="/Home/Logout">
                             Çıkış
-                            <span class="glyphicon glyphicon-log-out"></span>
+                            <span class="glyphicon glyphicon-log-out" style="color: #5cb85c"></span>
                         </a>
                     </li>
                     }

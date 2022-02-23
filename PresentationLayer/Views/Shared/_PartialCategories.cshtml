@@ -9,7 +9,7 @@
 
 <p class="lead">Kategoriler</p>
 <div class="list-group">
-    <a href="/Home/Index" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>Tümü</a>
+    <a href="/Home/Index" class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-arrow-right"></span>Tümü</a>
     @foreach (Category item in list)
     {
         <a href="/Home/ByCategory/@item.Id" title="@item.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Title</a>

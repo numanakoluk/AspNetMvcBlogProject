@@ -53,7 +53,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 
                 AboutFileImageName = "https://www.signal.com.tr/img/lineimg/hakkimizda.jpg",
-                AboutText = "Blog Sayfası"
+                AboutText = "Blog Sayfasım"
             };
             
             context.Abouts.Add(about);
