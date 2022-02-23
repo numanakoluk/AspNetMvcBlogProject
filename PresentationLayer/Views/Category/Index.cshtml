@@ -76,7 +76,7 @@
             }
 
         </table>
-        @Html.PagedListPager(Model, sayfa => Url.Action("Index", new { sayfa }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
     </div>
 
 </div>

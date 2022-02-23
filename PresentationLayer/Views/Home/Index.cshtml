@@ -10,6 +10,16 @@
         <div class="col-md-3">
             <!----Kategoriler-->
             @Html.Partial("_PartialCategories")
+            <!--Not Ara-->
+            @using (Html.BeginForm("Index","Home",FormMethod.Get))
+            {
+                
+                @Html.TextBox("searching")
+                <br />
+                <br />
+                <button type="submit" class="btn btn-success">Not Ara</button>
+            }
+
         </div>
 
         <div class="col-md-9">
@@ -90,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-                }
+                    }
             </div>
         </div>
     </div>
