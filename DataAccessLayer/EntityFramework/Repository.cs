@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.EntityFramework
 {
-   public class Repository<T> :RepositoryBase, IDataAccess<T> where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
+   public class Repository<T> :RepositoryBase, IRepository<T> where T:class //RepositoryBase'den miras alarak DB'yi efektif kullanıyorum
     {
         //Repository pattern
 
-        //private DataBaseContext db = new DataBaseContext(); Eski Hali BasedClass öncesi
+        //private DataBaseContext db = new DataBaseContext(); Eski Hali BasedClass öncesi Lock hatası verdi.
         
         private DbSet<T> _objectSet;
         public Repository()
@@ -28,17 +28,17 @@ namespace DataAccessLayer.EntityFramework
             //return db.Set<T>().ToList(); //Burada set edecegimiz icin bir kısıt yazmamız gerekiyor.Bu int da olabilir fakat kısıtladığımız zaman hata gidiyor.
            return _objectSet.ToList();
         }
-        public IQueryable<T> ListQueryable()
+        public IQueryable<T> ListQueryable() //Ne zaman sorguyu çağırırsak o zaman sorgu çalışsın istiyorsak.OrderBy eklenebilsin 
         {
             //Şartlı sorgu için..
-            return _objectSet.AsQueryable<T>();
+            return _objectSet.AsQueryable<T>(); //AsQuaeryable daha hızlı
         }
         public List<T> List(Expression<Func<T,bool>> where) //İstenilen kritere göre Listeletme
         {
             return _objectSet.Where(where).ToList(); //Expressionu parametre olarak yazdım.
         }
 
-        public int Insert(T obj)
+        public int Insert(T obj) //int yapma sebebimiz kaç kayıt etkinlenecekse o kadar kayıt dönmek.
         {
             //db.Set<T>().Add(obj);
             _objectSet.Add(obj);

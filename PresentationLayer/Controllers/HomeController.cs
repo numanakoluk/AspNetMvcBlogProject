@@ -21,7 +21,7 @@ namespace PresentationLayer.Controllers
         private AboutManager aboutManager = new AboutManager();
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(string searching)
         {
             //CategoryController üzerinden gelen view Talebi ve model
             //if(TempData["mm"]!= null)
@@ -30,7 +30,7 @@ namespace PresentationLayer.Controllers
             //}
             
             //Draft olmayanlar gelsin için where sorgusu ekledim.
-            return View(noteManager.ListQueryable().Where(x=>x.IsDraft == false).OrderByDescending(x=>x.ModifiedOn).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
+            return View(noteManager.ListQueryable().Where(x=>x.IsDraft == false).OrderByDescending(x=>x.ModifiedOn).Where(x=>x.Title.Contains(searching) || searching==null).ToList()); //Son yazılanları sıralayarak. C sharp tarafından
             //return View(nm.GetAllNote().OrderByDescending(x=>x.ModifiedOn).ToList()); //Sql Tarafından 
 
         }
@@ -63,11 +63,11 @@ namespace PresentationLayer.Controllers
         public ActionResult About()
         {
 
-            aboutManager.List();
+            
 
 
 
-            return View();
+            return View(aboutManager.List());
         }
         //Profil Goruntuleme
         public ActionResult ShowProfile()

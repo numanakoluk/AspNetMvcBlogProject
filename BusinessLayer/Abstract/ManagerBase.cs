@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BusinessLayer.Abstract
 {
     //Amaç esas işin DAL'da yapılmasını sağlamak fakat araya bir katman daha çıktık Core olarak.Abstract yapma sebebimiz new'lenemesin.
-    public abstract class ManagerBase<T> : IDataAccess<T> where T:class
+    public abstract class ManagerBase<T> : IRepository<T> where T:class
     {
         private Repository<T> repo = new Repository<T>();
         public virtual int Delete(T obj) //Methodu bazı yerlerde ezmek için virtual yapıyorum

@@ -52,13 +52,13 @@ namespace DataAccessLayer.EntityFramework
             About about = new About()
             {
                 
-                AboutFileImageName = "ABCd",
-                AboutText = "ABCD"
+                AboutFileImageName = "https://www.signal.com.tr/img/lineimg/hakkimizda.jpg",
+                AboutText = "Blog Sayfası"
             };
             
             context.Abouts.Add(about);
 
-            //8 Değer ekle...
+            //8 Kullanıcı Notu  ekle...
             for (int i = 0; i < 8; i++)
             {
                 NoteUser user = new NoteUser()

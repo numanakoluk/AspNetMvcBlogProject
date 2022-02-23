@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.MySql
 {
-    public class Repository<T> : RepositoryBase, IDataAccess<T> where T : class
+    public class Repository<T> : RepositoryBase, IRepository<T> where T : class
     {
         public int Delete(T obj)
         {

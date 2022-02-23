@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.DataAccess
 {
-    public interface IDataAccess<T>
+    public interface IRepository<T>
     {
          List<T> List();
-
-         IQueryable<T> ListQueryable();
 
          List<T> List(Expression<Func<T, bool>> where);
 
@@ -24,7 +22,11 @@ namespace Core.DataAccess
 
          int Save();
 
-         T Find(Expression<Func<T, bool>> where); 
-       
+         T Find(Expression<Func<T, bool>> where);
+        
+
+        //IQuaryable tüm sorguyu çekmez.Daha kullanışlıdır.IEnumarable'a göre
+        IQueryable<T> ListQueryable();
+
     }
 }
