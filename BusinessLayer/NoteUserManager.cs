@@ -23,7 +23,7 @@ namespace BusinessLayer
             //Kullanıcı e-posta kontrolü
             //Kayıt işlemi
             //Kayıt işlemi
-            //Aktivasyon e-postası gönderimi.
+            //Aktivasyon e-postası gönderimi.(İptal.)
            NoteUser user= Find(x => x.UserName == data.Username || x.Email == data.Email);
            BusinessLayerResult<NoteUser> res = new BusinessLayerResult<NoteUser>();
             if (user!=null)
@@ -57,10 +57,10 @@ namespace BusinessLayer
                 {
                     res.Result= Find(x => x.Email == data.Email && x.UserName == data.Username);
                     //TODO: aktivasyon maili atılacak.
-                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
-                    string activateUri = $"{siteUri}/Home/UserActivate/{res.Result.ActivateGuid}";
-                    string body = $"Merhaba {res.Result.UserName};<br><br>Hesabını aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayınız</a>.";
-                    MailHelper.SendMail(body, res.Result.Email, "Blog Hesap Aktifleştirme");
+                    //string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    //string activateUri = $"{siteUri}/Home/UserActivate/{res.Result.ActivateGuid}";
+                    //string body = $"Merhaba {res.Result.UserName};<br><br>Hesabını aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayınız</a>.";
+                    //MailHelper.SendMail(body, res.Result.Email, "Blog Hesap Aktifleştirme");
                 }
                
             }
