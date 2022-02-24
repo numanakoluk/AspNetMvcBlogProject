@@ -192,7 +192,7 @@ namespace PresentationLayer.Controllers
                 BusinessLayerResult<NoteUser> res = noteUserManager.LoginUser(model);
                 if (res.Errors.Count > 0)
                 {
-                    if (res.Errors.Find(x => x.Code == ErrorMessageCode.UserIsNotActive) != null) //Sınıf yazma sebebi bu
+                    if (res.Errors.Find(x => x.Code == ErrorMessageCode.KullaniciAktifDegil) != null) //Sınıf yazma sebebi bu
                     {
                         ViewBag.SetLink = "http://Home/Activate/1234-4567-7890"; //Aslında amaç gelen hata mesajlarını da ayıklamak.
                     }

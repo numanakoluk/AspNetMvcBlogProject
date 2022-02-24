@@ -30,11 +30,11 @@ namespace BusinessLayer
             {
                 if (user.UserName == data.Username)
                 {
-                    res.AddError(ErrorMessageCode.UsernameAlreadyExists,"Kullanıcı Adı Kayıtlı");
+                    res.AddError(ErrorMessageCode.KullanıcıAdiKayitli,"Kullanıcı Adı Kayıtlı");
                 }
                 if (user.Email == data.Email)
                 {
-                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-Posta Adresi Kayıtlı");
+                    res.AddError(ErrorMessageCode.EpostaAdresiKayitli, "E-Posta Adresi Kayıtlı");
                 }
             }
             else
@@ -73,7 +73,7 @@ namespace BusinessLayer
             res.Result = Find(x => x.Id == id);
             if (res.Result == null)
             {
-                res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı Bulunamadı.");
+                res.AddError(ErrorMessageCode.KullaniciBulunamadi, "Kullanıcı Bulunamadı.");
             }
             return res;
         }
@@ -90,16 +90,16 @@ namespace BusinessLayer
             {
                 if (!res.Result.IsActive)
                 {
-                res.AddError(ErrorMessageCode.UserIsNotActive, "Kullanıcı Aktifleştirilmemiştir");
+                res.AddError(ErrorMessageCode.KullaniciAktifDegil, "Kullanıcı Aktifleştirilmemiştir");
                 
-                res.AddError(ErrorMessageCode.CheckYourEmail, "Lütfen E-Posta Adresinizi Kontrol Ediniz.");
+                res.AddError(ErrorMessageCode.MailKontrol, "Lütfen E-Posta Adresinizi Kontrol Ediniz.");
                 }
                 
 
             }
             else
             {
-                res.AddError(ErrorMessageCode.UsernamaOrPassWrong, "Kullanıcı Adı veya Şifre Uyuşmuyor.");
+                res.AddError(ErrorMessageCode.KullaniciyadaSifreHatali, "Kullanıcı Adı veya Şifre Uyuşmuyor.");
                 
             }
             return res;
@@ -113,7 +113,7 @@ namespace BusinessLayer
             {
                 if (res.Result.IsActive)
                 {
-                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Kullanıcı Zaten Aktif Edilmiştir.");
+                    res.AddError(ErrorMessageCode.KullaniciAktif, "Kullanıcı Zaten Aktif Edilmiştir.");
                     return res;
                 }
                 res.Result.IsActive = true;
@@ -122,7 +122,7 @@ namespace BusinessLayer
 
             else
             {
-                res.AddError(ErrorMessageCode.ActivateIdDoesNotExists, "Aktifleştirecek Kullanıcı Bulunamadı.");
+                res.AddError(ErrorMessageCode.AktifKullaniciBulunamadi, "Aktifleştirecek Kullanıcı Bulunamadı.");
 
             }
 
@@ -139,12 +139,12 @@ namespace BusinessLayer
             {
                 if (db_user.UserName == data.UserName)
                 {
-                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                    res.AddError(ErrorMessageCode.KullanıcıAdiKayitli, "Kullanıcı adı kayıtlı.");
                 }
 
                 if (db_user.Email == data.Email)
                 {
-                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-posta adresi kayıtlı.");
+                    res.AddError(ErrorMessageCode.EpostaAdresiKayitli, "E-posta adresi kayıtlı.");
                 }
 
                 return res;
@@ -164,7 +164,7 @@ namespace BusinessLayer
 
             if (base.Update(res.Result) == 0)
             {
-                res.AddError(ErrorMessageCode.ProfileCouldNotUpdated, "Profil güncellenemedi.");
+                res.AddError(ErrorMessageCode.ProfilGuncellenemedi, "Profil güncellenemedi.");
             }
 
             return res;
@@ -181,14 +181,14 @@ namespace BusinessLayer
             {
                 if (Delete(user) ==0)
                 {
-                    res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı Silinemedi.");
+                    res.AddError(ErrorMessageCode.KullaniciSilinemedi, "Kullanıcı Silinemedi.");
                     return res;
                 }
             }
             else
             {
                 //Admin silme durumu..
-                res.AddError(ErrorMessageCode.UserCouldNotRemove, "Kullanıcı Bulunumadı.");
+                res.AddError(ErrorMessageCode.KullaniciSilinemedi, "Kullanıcı Bulunumadı.");
             }
             return res;
         }
@@ -210,11 +210,11 @@ namespace BusinessLayer
             {
                 if (user.UserName == data.UserName)
                 {
-                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı Adı Kayıtlı");
+                    res.AddError(ErrorMessageCode.KullanıcıAdiKayitli, "Kullanıcı Adı Kayıtlı");
                 }
                 if (user.Email == data.Email)
                 {
-                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-Posta Adresi Kayıtlı");
+                    res.AddError(ErrorMessageCode.EpostaAdresiKayitli, "E-Posta Adresi Kayıtlı");
                 }
             }
             else
@@ -225,7 +225,7 @@ namespace BusinessLayer
 
                 if(base.Insert(res.Result) ==0)
                 {
-                    res.AddError(ErrorMessageCode.UserCouldNotInserted, "Kullanıcı Eklenemedi.");
+                    res.AddError(ErrorMessageCode.KullaniciEklenemedi, "Kullanıcı Eklenemedi.");
                 }
 
             }
@@ -241,12 +241,12 @@ namespace BusinessLayer
             {
                 if (db_user.UserName == data.UserName)
                 {
-                    res.AddError(ErrorMessageCode.UsernameAlreadyExists, "Kullanıcı adı kayıtlı.");
+                    res.AddError(ErrorMessageCode.KullanıcıAdiKayitli, "Kullanıcı adı kayıtlı.");
                 }
 
                 if (db_user.Email == data.Email)
                 {
-                    res.AddError(ErrorMessageCode.EmailAlredyExists, "E-posta adresi kayıtlı.");
+                    res.AddError(ErrorMessageCode.EpostaAdresiKayitli, "E-posta adresi kayıtlı.");
                 }
 
                 return res;
@@ -264,7 +264,7 @@ namespace BusinessLayer
 
             if (base.Update(res.Result) == 0)
             {
-                res.AddError(ErrorMessageCode.UserCouldtNotUpdated, "Kullanıcı güncellenemedi.");
+                res.AddError(ErrorMessageCode.KullaniciGuncellenemedi, "Kullanıcı güncellenemedi.");
             }
 
             return res;

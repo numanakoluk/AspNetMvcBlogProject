@@ -63,6 +63,10 @@
     <Compile Include="Migrations\202202211547042_1.Designer.cs">
       <DependentUpon>202202211547042_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202231752272_mig1.cs" />
+    <Compile Include="Migrations\202202231752272_mig1.Designer.cs">
+      <DependentUpon>202202231752272_mig1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MySql\Repository.cs" />
     <Compile Include="MySql\RepositoryBase.cs" />
@@ -95,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202211547042_1.resx">
       <DependentUpon>202202211547042_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202231752272_mig1.resx">
+      <DependentUpon>202202231752272_mig1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

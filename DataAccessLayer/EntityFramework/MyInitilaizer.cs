@@ -49,6 +49,8 @@ namespace DataAccessLayer.EntityFramework
             //Ekle
             context.NoteUsers.Add(admin);
             context.NoteUsers.Add(standartUser);
+
+
             About about = new About()
             {
                 

@@ -9,17 +9,18 @@ namespace EntiyLayers.Messages
     //Hata Mesajları Yarın bir gün farklı dillerde hata mesajları için
     public enum  ErrorMessageCode
     {
-        UsernameAlreadyExists =101,
-        EmailAlredyExists=102,
-        UserIsNotActive =151,
-        UsernamaOrPassWrong=152,
-        CheckYourEmail = 153,
-        UserAlreadyActive = 154,
-        ActivateIdDoesNotExists=155,
-        UserNotFound =156,
-        ProfileCouldNotUpdated = 157,
-        UserCouldNotRemove = 158,
-        UserCouldNotInserted = 159,
-        UserCouldtNotUpdated = 160
+       
+        KullanıcıAdiKayitli =101,
+        EpostaAdresiKayitli=102,
+        KullaniciAktifDegil =151,
+        KullaniciyadaSifreHatali=152,
+        MailKontrol = 153,
+        KullaniciAktif = 154,
+        AktifKullaniciBulunamadi=155,
+        KullaniciBulunamadi =156,
+        ProfilGuncellenemedi = 157,
+        KullaniciSilinemedi = 158,
+        KullaniciEklenemedi = 159,
+        KullaniciGuncellenemedi = 160
     }
 }

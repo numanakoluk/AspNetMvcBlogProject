@@ -41,6 +41,9 @@ namespace EntiyLayers
         //Bir notun birden çok like'ı vardır çoka çok
         public virtual List<Liked> Likes { get; set; }
 
+        [StringLength(500)]
+        public string NoteImagePath { get; set; }
+
         //Null Hatası almamak için.
         public Note()
         {
