@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EntiyLayers.ViewModel
+namespace EntiyLayers.ViewModelLogReg
 {
     public class LoginViewModel
     {
