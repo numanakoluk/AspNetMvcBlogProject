@@ -18,7 +18,7 @@ namespace EntiyLayers
         [Required]
         public DateTime ModifiedOn { get; set; }
         [Required, StringLength(30)]
-        public string ModifiedUserName { get; set; }
+        public string ModifiedUserName { get; set; } //Bu data default değeri değil de appteki session'dan gelecek.
 
 
 

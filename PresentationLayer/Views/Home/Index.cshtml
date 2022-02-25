@@ -11,9 +11,9 @@
             <!----Kategoriler-->
             @Html.Partial("_PartialCategories")
             <!--Not Ara-->
-            @using (Html.BeginForm("Index","Home",FormMethod.Get))
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
-                
+
                 @Html.TextBox("searching")
                 <br />
                 <br />
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    }
+                }
             </div>
         </div>
     </div>
@@ -115,7 +115,7 @@
 <!--Yorumlar Pop Up-->
 @BootStrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
 <!---Not Düzenleme Pop Up-->
-@BootStrap.ModalPopup(id: "modal_notedetail", title:"Not Detayı")
+@BootStrap.ModalPopup(id: "modal_notedetail", title: "Not Detayı")
 
 <script>
     var noteid = -1; //başta -1 dönsün dışarıdan başka yerden atayabileyim.
@@ -252,7 +252,7 @@
             url: "/Note/GetLiked",
             data: { ids: noteids }
         }).done(function (data) {
-     
+
 
             if (data.result != null && data.result.length > 0) {
                 for (var i = 0; i < data.result.length; i++) {

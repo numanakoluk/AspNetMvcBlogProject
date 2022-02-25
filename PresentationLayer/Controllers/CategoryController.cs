@@ -16,9 +16,9 @@ namespace PresentationLayer.Controllers
     public class CategoryController : Controller
     {
         private CategoryManager categoryManager = new CategoryManager(); 
-        public ActionResult Index(int sayfa= 1)
+        public ActionResult Index(int page = 1)
         {
-            return View(categoryManager.List().ToPagedList(sayfa, 3));
+            return View(categoryManager.List().ToPagedList(page, 3));
         }
 
         public ActionResult Details(int? id)
