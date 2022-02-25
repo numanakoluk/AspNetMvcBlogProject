@@ -1,0 +1,79 @@
+﻿@model IEnumerable<EntiyLayers.Note>
+
+@{
+    ViewBag.Title = "Notlarım";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-5">
+        <h2>Not Düzenle</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+
+            <a href="/Note/Create" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span>Not Ekle
+            </a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDraft)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LikeCount)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDraft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LikeCount)
+                    </td>
+                    <td>
+                        <a href="/NoteAdmin/Edit/@item.Id" class="btn btn-warning btn-sm" title="Düzenle">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="/NoteAdmin/Details/@item.Id" class="btn btn-info btn-sm" title="Detay">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                        <a href="/NoteAdmin/Delete/@item.Id " class="btn btn-danger btn-sm" title="Sil">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>

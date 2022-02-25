@@ -142,6 +142,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NoteAdminController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\NoteUserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,6 +191,10 @@
     <Content Include="Views\Shared\_PartialComments.cshtml" />
     <Content Include="Views\Shared\_PartialNoteText.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\NoteAdmin\Index.cshtml" />
+    <Content Include="Views\NoteAdmin\Details.cshtml" />
+    <Content Include="Views\NoteAdmin\Edit.cshtml" />
+    <Content Include="Views\NoteAdmin\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

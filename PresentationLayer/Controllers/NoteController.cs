@@ -12,6 +12,7 @@ using PresentationLayer.Models;
 
 namespace PresentationLayer.Controllers
 {
+
     public class NoteController : Controller
     {
         NoteManager noteManager = new NoteManager();

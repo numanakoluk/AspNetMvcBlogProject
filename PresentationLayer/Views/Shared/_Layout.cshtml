@@ -67,17 +67,39 @@
                                 <li><a href="/Note/MyLikedNotes"><span class="glyphicon glyphicon glyphicon-heart" style="color: #5cb85c"></span>Beğendiklerim</a></li>
                                 @if (user.IsAdmin)
                                 {
-                                    <li role="separator" class="divider"></li>
 
-                                    <li><a href="/Category/Create"><span class="glyphicon glyphicon-plus" style="color: #5cb85c">
-                                         </span>Kategori Ekle</a></li>
-                                    <li><a href="/Category/Index"><span class="glyphicon glyphicon-th-list" style="color: #5cb85c">
-                                         </span>Kategoriler</a></li>
+                                    <li>
+                                        <a href="/NoteAdmin/Index">
+                                            <span class="glyphicon glyphicon-list" style="color: #5cb85c">
+                                            </span>Düzenlenebilir Notlar
+                                        </a>
+                                    </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="/NoteUser/Create"><span class="glyphicon glyphicon-plus" style="color: #5cb85c">
-                                         </span>Kullanıcı Ekle</a></li>
-                                    <li><a href="/NoteUser/Index"><span class="glyphicon glyphicon-th-list" style="color: #5cb85c">
-                                         </span>Kullanıcılar</a></li>
+                                    <li>
+                                        <a href="/Category/Create">
+                                            <span class="glyphicon glyphicon-plus" style="color: #5cb85c">
+                                            </span>Kategori Ekle
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Category/Index">
+                                            <span class="glyphicon glyphicon-th-list" style="color: #5cb85c">
+                                            </span>Kategoriler
+                                        </a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="/NoteUser/Create">
+                                            <span class="glyphicon glyphicon-plus" style="color: #5cb85c">
+                                            </span>Kullanıcı Ekle
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/NoteUser/Index">
+                                            <span class="glyphicon glyphicon-th-list" style="color: #5cb85c">
+                                            </span>Kullanıcılar
+                                        </a>
+                                    </li>
                                 }
                             </ul>
                         </li>
