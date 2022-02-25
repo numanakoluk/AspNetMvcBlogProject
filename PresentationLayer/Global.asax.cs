@@ -16,6 +16,7 @@ namespace PresentationLayer
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            //
             App.Common = new WebCommon(); //Eðer bu iþlemi yapmasaydýk getUserName default ile çalýþacaktý.
         }
     }

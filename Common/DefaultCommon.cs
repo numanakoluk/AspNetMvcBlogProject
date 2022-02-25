@@ -8,6 +8,7 @@ namespace Common
 {
     public class DefaultCommon : ICommon
     {
+        //2-)GetCurrent Name'i n default değeri
        public string GetCurrentUserName()
         {
             return "system";

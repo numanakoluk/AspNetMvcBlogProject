@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Common
 {
     public static class App
+    //Artık şu an DefaultCommon ile çalışıyor.Common.Get UserName dediğimde DefaltCommon sınıfı çalışacak.Ve bu işlem newlemeden olacak statik olduğu için.
     {
-        public static ICommon Common = new DefaultCommon(); //Artık şu an DefaultCommon ile çalışıyor.Common.Get UserName dediğimde DefaltCommon sınıfı çalışacak.
+        public static ICommon Common = new DefaultCommon(); 
     }
 }

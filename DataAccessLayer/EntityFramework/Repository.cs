@@ -50,7 +50,7 @@ namespace DataAccessLayer.EntityFramework
                 o.CreatedOn = now;
                 o.ModifiedOn = now;
                 o.ModifiedUserName = App.Common.GetCurrentUserName(); //TODO: İşlem yapan kullanıcı adı yazılmalı...
-
+                //Burada normalde o.ModifiedUserName ="Default" diyoduk burası Common katmandan geliyor
             }
             return Save();  //Methodu asagıdan cagırdık.
 
