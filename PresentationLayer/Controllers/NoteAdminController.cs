@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using EntiyLayers;
+using PresentationLayer.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ using System.Web.Mvc;
 
 namespace PresentationLayer.Controllers
 {
+    [AuthLogin]
+    [AuthAdmin]
     public class NoteAdminController : Controller
     {
         NoteManager noteManager = new NoteManager(); 

@@ -12,7 +12,7 @@
     <a href="/Home/Index" class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-arrow-right"></span>Tümü</a>
     @foreach (Category item in list)
     {
-<a href="/Home/ByCategory/@item.Id" title="@item.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Title  Entry Sayısı &hearts;     <strong> @item.Notes.Count</strong></a>
+<a href="/Home/ByCategory/@item.Id" title="@item.Description" class="list-group-item"><span class="glyphicon glyphicon-arrow-right"></span>@item.Title  Entry Sayısı <>     <strong> @item.Notes.Count</strong></a>
 
     }
 

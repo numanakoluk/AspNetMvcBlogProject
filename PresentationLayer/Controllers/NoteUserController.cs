@@ -9,9 +9,12 @@ using System.Web.Mvc;
 using BusinessLayer;
 using BusinessLayer.Results;
 using EntiyLayers;
+using PresentationLayer.Filters;
 
 namespace PresentationLayer.Controllers
 {
+    [AuthLogin]
+    [AuthAdmin]
     public class NoteUserController : Controller
     {
         private NoteUserManager noteUserManager = new NoteUserManager();

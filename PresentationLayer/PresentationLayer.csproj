@@ -145,6 +145,8 @@
     <Compile Include="Controllers\NoteAdminController.cs" />
     <Compile Include="Controllers\NoteController.cs" />
     <Compile Include="Controllers\NoteUserController.cs" />
+    <Compile Include="Filters\AuthAdmin.cs" />
+    <Compile Include="Filters\AuthLogin.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +197,7 @@
     <Content Include="Views\NoteAdmin\Details.cshtml" />
     <Content Include="Views\NoteAdmin\Edit.cshtml" />
     <Content Include="Views\NoteAdmin\Delete.cshtml" />
+    <Content Include="Views\Home\NoAuthorization.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

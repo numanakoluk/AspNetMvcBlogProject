@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BusinessLayer;
 using EntiyLayers;
+using PresentationLayer.Filters;
 using PresentationLayer.Models;
 
 namespace PresentationLayer.Controllers
@@ -19,6 +20,7 @@ namespace PresentationLayer.Controllers
         CategoryManager categoryManager = new CategoryManager();
         private LikedManager likedManager = new LikedManager();
 
+        [AuthLogin]
         public ActionResult Index()
         {
 
@@ -29,6 +31,8 @@ namespace PresentationLayer.Controllers
 
             return View(notes.ToList());
         }
+
+        [AuthLogin]
         public ActionResult MyLikedNotes()
         {
             var notes = likedManager.ListQueryable().Include("LikedUser").Include("Note").Where(
@@ -39,6 +43,7 @@ namespace PresentationLayer.Controllers
             return View("Index", notes.ToList());
         }
 
+        [AuthLogin]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -53,13 +58,14 @@ namespace PresentationLayer.Controllers
             return View(note);
         }
 
+        [AuthLogin]
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title");
             return View();
         }
 
-        
+        [AuthLogin]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Note note)
@@ -78,7 +84,7 @@ namespace PresentationLayer.Controllers
             ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
             return View(note);
         }
-
+        [AuthLogin]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,7 +99,7 @@ namespace PresentationLayer.Controllers
             ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
             return View(note);
         }
-
+        [AuthLogin]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Note note)
@@ -116,7 +122,7 @@ namespace PresentationLayer.Controllers
             ViewBag.CategoryId = new SelectList(categoryManager.List(), "Id", "Title", note.CategoryId);
             return View(note);
         }
-
+        [AuthLogin]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -130,7 +136,7 @@ namespace PresentationLayer.Controllers
             }
             return View(note);
         }
-
+        [AuthLogin]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

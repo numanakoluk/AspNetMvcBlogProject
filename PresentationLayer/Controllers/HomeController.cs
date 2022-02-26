@@ -3,6 +3,7 @@ using BusinessLayer.Results;
 using EntiyLayers;
 using EntiyLayers.Messages;
 using EntiyLayers.ViewModelLogReg;
+using PresentationLayer.Filters;
 using PresentationLayer.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,8 @@ namespace PresentationLayer.Controllers
             return View(aboutManager.List());
         }
         //Profil Goruntuleme
+
+        [AuthLogin]
         public ActionResult ShowProfile()
         {
             NoteUser currentUser = Session["login"] as NoteUser;
@@ -86,7 +89,7 @@ namespace PresentationLayer.Controllers
             }
             return View(res.Result);
         }
-
+        [AuthLogin]
         public ActionResult EditProfile()
         {
             NoteUser currentUser = Session["login"] as NoteUser;
@@ -106,6 +109,7 @@ namespace PresentationLayer.Controllers
         }
 
         [HttpPost]
+        [AuthLogin]
         public ActionResult EditProfile(NoteUser model, HttpPostedFileBase ProfileImage) //HttpPosteFileBase ile img çekilecek.
         {
             
@@ -143,6 +147,7 @@ namespace PresentationLayer.Controllers
         }
 
         //Get kısmında silinecek post kısmı js ile yapılacak
+        [AuthLogin]
         public ActionResult DeleteProfile()
         {
             NoteUser currentUser = Session["login"] as NoteUser;
@@ -288,7 +293,11 @@ namespace PresentationLayer.Controllers
 
             return RedirectToAction("Index");
         }
-
+        //Erişim Engellendi sayfası.
+        public ActionResult NoAuthorization()
+        {
+            return View();
+        }
 
     }
 }

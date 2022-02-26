@@ -1,5 +1,6 @@
 ﻿using BusinessLayer;
 using EntiyLayers;
+using PresentationLayer.Filters;
 using PresentationLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ namespace PresentationLayer.Controllers
             return PartialView("_PartialComments", note.Comments);
         }
         
+       
+        
+       [AuthLogin] //editlenme login olduktan sonra olabilir.
        [HttpPost]
       public ActionResult Edit(int? id, string text) //Rooting id // text ise ajaxta yakalasın diye.
         {
@@ -49,6 +53,8 @@ namespace PresentationLayer.Controllers
             }
             return Json(new { result = false }, JsonRequestBehavior.AllowGet);
         }
+
+        [AuthLogin]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -70,6 +76,7 @@ namespace PresentationLayer.Controllers
 
             return Json(new { result = false }, JsonRequestBehavior.AllowGet);
         }
+        [AuthLogin]
         [HttpPost]
         public ActionResult Create(Comment comment, int? noteid)
         {

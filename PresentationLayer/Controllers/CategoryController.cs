@@ -10,9 +10,12 @@ using BusinessLayer;
 using EntiyLayers;
 using PagedList;
 using PagedList.Mvc;
+using PresentationLayer.Filters;
 
 namespace PresentationLayer.Controllers
 {
+    [AuthLogin] //Buraya eklersem tüm methodlarda çalışacak..
+    [AuthAdmin] //Admin yetkisinde olacak olanlar.
     public class CategoryController : Controller
     {
         private CategoryManager categoryManager = new CategoryManager(); 
