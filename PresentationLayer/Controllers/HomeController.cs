@@ -198,14 +198,24 @@ namespace PresentationLayer.Controllers
                 {
                     if (res.Errors.Find(x => x.Code == ErrorMessageCode.KullaniciAktifDegil) != null) //Sınıf yazma sebebi bu
                     {
-                        ViewBag.SetLink = "http://Home/Activate/1234-4567-7890"; //Aslında amaç gelen hata mesajlarını da ayıklamak.
+                        ViewBag.SetLink = "https://mail.google.com"; //viewbag ile link taşıma.
                     }
                     res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
 
                     return View(model);
                 }
+
                 Session["login"] = res.Result;//Session'a kullanıcı bilgi saklama
+
+                //HttpCookie hc1 = new HttpCookie("Username", model.Username.ToString());
+                //hc1.Expires = DateTime.Now.AddDays(1);
+                //Response.Cookies.Add(hc1);
+
+                //HttpCookie hc2 = new HttpCookie("Password", model.Password.ToString());
+                //hc1.Expires = DateTime.Now.AddDays(1);
+                //Response.Cookies.Add(hc2);
                 return RedirectToAction("Index"); //Yönlendirme
+
             }
             return View(model);
         }

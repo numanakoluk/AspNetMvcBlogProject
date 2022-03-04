@@ -24,8 +24,10 @@
                     @Html.ValidationSummary(false)
                     @if (ViewBag.SetLink != null)
                     {
-                        <a href="@ViewBag.SetLink" class="btn btn-primary">Activate</a>
+                         <a href="@ViewBag.SetLink" class="btn btn-success">Gmail Aktif Et</a>
                     }
+                    @if(Response.Cookies!= null)
+                    { 
                     <div class="input-group ">
                         <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
                         @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Kullanıcı Adınız" })
@@ -39,7 +41,7 @@
 
                         <button type="submit" class="btn btn-success btn-lg btn-block login-button">Giriş Yap</button>
                     </div>
-
+                    }
 
 
                 </div>
