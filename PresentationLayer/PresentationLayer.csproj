@@ -198,6 +198,7 @@
     <Content Include="Views\NoteAdmin\Edit.cshtml" />
     <Content Include="Views\NoteAdmin\Delete.cshtml" />
     <Content Include="Views\Home\NoAuthorization.cshtml" />
+    <Content Include="Views\Note\MyLikedNotes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

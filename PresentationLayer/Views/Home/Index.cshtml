@@ -59,8 +59,10 @@
                 {
                     <div class="col-sm-4 col-lg-4 col-md-4" data-note-id="@note.Id">
                         <div class="thumbnail">
-                            <img src="https://picsum.photos/320/150?random=@(Model.IndexOf(note) % 10)" alt="@note.Title">
-                            @*<img src="@note.NoteImagePath" style="width:210px" height="150" alt="@note.Title">*@
+                            <!--210.49-->
+                            @*<img src="https://picsum.photos/320/150?random=@(Model.IndexOf(note) % 10)" alt="@note.Title">*@
+                            <br />
+                            <img src="@note.NoteImagePath" style="width:225px; height:100px;" alt="@note.Title">
                             <div class="caption">
                                 <h4>
                                     <a href="#" data-toggle="modal" data-target="#modal_notedetail" data-note-id="@note.Id">

@@ -40,7 +40,7 @@ namespace PresentationLayer.Controllers
                 x => x.Note).Include("Category").Include("Owner").OrderByDescending(
                 x => x.ModifiedOn);
 
-            return View("Index", notes.ToList());
+            return View(notes.ToList());
         }
 
         [AuthLogin]
