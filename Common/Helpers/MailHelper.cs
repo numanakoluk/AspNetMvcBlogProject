@@ -40,7 +40,7 @@ namespace Common.Helpers
                 {
                     smtp.EnableSsl = true;
                     smtp.Credentials =
-                        new NetworkCredential( //kimin yetkileriyle girecek
+                        new NetworkCredential(
                             ConfigHelper.Get<string>("MailUser"),
                             ConfigHelper.Get<string>("MailPass"));
 
